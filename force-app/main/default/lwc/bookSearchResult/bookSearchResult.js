@@ -1,11 +1,14 @@
-import { LightningElement, wire, track } from 'lwc';
+import { LightningElement, wire, track, api } from 'lwc';
 import getAllBooks from '@salesforce/apex/bookSearchResultController.getAllBooks';
+import ShowToastEvent from 'lightning/platformShowToastEvent';
 
 export default class BookSearchResults extends LightningElement {
+    @api selectedCategoryId;
+    @api searchedKeyword;
 
-    @track allBooks;
+    allBooks;
 
-    @wire(getAllBooks)
+    @wire(getAllBooks, {selectedCategoryId: '$selectedCategoryId'})
     wirdeBooks({data, error}){
         if(data){
             this.allBooks = []
@@ -20,7 +23,22 @@ export default class BookSearchResults extends LightningElement {
                 this.allBooks.push(book);
             });
         } else if (error) {
-            console.log('ERROR during the books saving!');
+            this.showToast('ERROR', error.body.message, 'error')
         }
     };
+
+    showToast(title, message, variant){
+        const event = new ShowToastEvent({
+            title,
+            message,
+            variant,
+        });
+        this.dispatchEvent(event);
+    }
+
+    get booksFound(){
+        return !!this.allBooks;
+    }
+
+
 }

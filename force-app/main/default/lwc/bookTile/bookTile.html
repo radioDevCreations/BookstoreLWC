@@ -1,12 +1,25 @@
 <template>
-    <div class="book" >
-        <header>{bookDetails.Name}</header>
-        <section>
+    <div class="book slds-align_absolute-center slds-var-p-around_large" >
+
+        
+
+        <section class="price">
+            {bookDetails.Price__c}
+        </section>
+        <section class="price">
+            {bookDetails.Name}
+        </section>
+        <section class="title">
             {bookDetails.Author__c}
         </section>
-        <section>
-            {bookDetails.Author__c}
+        <section class="author">
+            {bookDetails.Category__c}
         </section>
 
+        <lightning-button
+        label="Buy this Book"
+        onclick={handleBuyButtonClick}
+        variant="success"
+        class="slds-var-m-top_small"></lightning-button>
     </div>
 </template>

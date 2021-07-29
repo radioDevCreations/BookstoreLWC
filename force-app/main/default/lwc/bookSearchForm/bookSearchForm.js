@@ -2,10 +2,7 @@ import { LightningElement, track, wire } from 'lwc';
 import getCategories from '@salesforce/apex/bookSearchFormController.getCategories';
 
 export default class BookSearchForm extends LightningElement {
-
-    @track selectedCategory;
     @track bookCategories;
-    @track typedTitle;
 
     @wire(getCategories)
     wiredCategories({data, error}){
@@ -23,14 +20,17 @@ export default class BookSearchForm extends LightningElement {
     };
 
     handleCategoryChange(event){
-        this.selectedCategory = event.detail.value;
         const categoryId = event.detail.value;
+        
         const selectedCategoryChangeEvent = new CustomEvent('selectedcategorychange', {detail: categoryId});
         this.dispatchEvent(selectedCategoryChangeEvent);
     }
 
     handleTypedTitleChange(event){
-        this.typedTitle = event.detail.value;
+        const keyword = event.detail.value;
+
+        const searchByKeywordChangeEvent = new CustomEvent('searchbykeywordchange', {detail: keyword});
+        this.dispatchEvent(searchByKeywordChangeEvent);
     }
 
 }

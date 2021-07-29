@@ -1,6 +1,6 @@
 <template>
     <lightning-card title="Browse the Bookstore">
-        <c-book-search-form></c-book-search-form>
-        <c-book-search-result></c-book-search-result>  
+        <c-book-search-form onselectedcategorychange={handleSelectBookCategory} onsearchbykeywordchange={handleSearchByKeywordChange}></c-book-search-form>
+        <c-book-search-result selected-category-id={selectedCategoryId} searched-keyword={searchedKeyword}></c-book-search-result>  
     </lightning-card>
 </template>
