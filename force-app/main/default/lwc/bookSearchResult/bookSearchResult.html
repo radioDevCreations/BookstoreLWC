@@ -1,0 +1,13 @@
+<template>
+    <lightning-layout class="slds-size_full">
+        <lightning-layout-item class="slds-var-p-around_medium books-grid slds-size_full">
+            <h2 class="slds-var-p-vertical_small">Searching Result</h2>
+            <div class="slds-grid slds-wrap slds-size_full">
+                <template for:each={allBooks} for:item="book">
+                    <c-book-tile key={book.Id} book-details={book} 
+                    class="slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_4-of-12 slds-var-p-around_small"></c-book-tile>
+                </template>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

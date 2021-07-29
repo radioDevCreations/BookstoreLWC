@@ -1,7 +1,8 @@
 .books-browser{
-    width: 100%;
     height: 100%;
-
-    color: white;
     display: flex;
+}
+
+.books-grid{
+    color: black;
 }
