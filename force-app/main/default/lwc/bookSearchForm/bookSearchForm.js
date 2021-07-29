@@ -3,6 +3,7 @@ import getCategories from '@salesforce/apex/bookSearchFormController.getCategori
 
 export default class BookSearchForm extends LightningElement {
 
+    @track selectedCategory;
     @track bookCategories;
     @track typedTitle;
 
@@ -22,6 +23,7 @@ export default class BookSearchForm extends LightningElement {
     };
 
     handleCategoryChange(event){
+        this.selectedCategory = event.detail.value;
         const categoryId = event.detail.value;
         const selectedCategoryChangeEvent = new CustomEvent('selectedcategorychange', {detail: categoryId});
         this.dispatchEvent(selectedCategoryChangeEvent);
