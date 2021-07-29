@@ -6,3 +6,22 @@
     border: 1px solid #000;
     border-radius: 5px;
 }
+
+.image{
+    width: 100px;
+    height: 100px;
+}
+
+.price{
+    font-size: 18px;
+    color: black;
+}
+
+.current-price{
+    font-size: 20px;
+    color: orange;
+}
+.last-price{
+    font-size: 20px;
+    color: grey;
+}

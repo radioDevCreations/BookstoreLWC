@@ -20,6 +20,8 @@ export default class BookSearchResults extends LightningElement {
                 book.Category__c = item.Category__c;
                 book.Price__c = item.Price__c;
                 book.ISBN__c = item.ISBN__c;
+                book.PictureURL__c = item.PictureURL__c;
+                book.Discount__c = item.Discount__c;
                 this.allBooks.push(book);
             });
         } else if (error) {

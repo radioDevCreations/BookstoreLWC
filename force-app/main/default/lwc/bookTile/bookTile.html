@@ -2,18 +2,22 @@
     <div class="book slds-align_absolute-center slds-var-p-around_large" >
 
         
-
-        <section class="price">
-            {bookDetails.Price__c}
-        </section>
-        <section class="price">
+        <img src={bookDetails.PictureURL__c} alt={bookDetails.Name} class="image"/>
+        <template if:true={priceAfterDiscount}>
+            <section class="price">
+                <strong class="current-price">{priceAfterDiscount}&euro;</strong> / <del class="last-price">{bookDetails.Price__c}&euro;</del>
+            </section>
+        </template>
+        <template if:false={priceAfterDiscount}>
+            <section class="price">
+                <span>{bookDetails.Price__c}&euro;</span>
+            </section>
+        </template>
+        <section class="title">
             {bookDetails.Name}
         </section>
-        <section class="title">
-            {bookDetails.Author__c}
-        </section>
         <section class="author">
-            {bookDetails.Category__c}
+            {bookDetails.Author__c}
         </section>
 
         <lightning-button
