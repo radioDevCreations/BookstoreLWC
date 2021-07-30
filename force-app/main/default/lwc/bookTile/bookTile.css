@@ -3,13 +3,21 @@
     flex-direction: column;
     justify-content: center;
 
-    border: 1px solid #000;
-    border-radius: 5px;
+    border: 2px solid rgb(160, 160, 160);
+    height: 400px;
 }
 
 .image{
     width: 100px;
     height: 100px;
+}
+
+.title{
+    text-align: center;
+    font-size: 16px;
+    max-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .price{

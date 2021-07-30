@@ -16,7 +16,7 @@ export default class BookSearchResults extends LightningElement {
                 const book = {};
                 book.Id = item.Id;
                 book.Name = item.Name;
-                book.Author__c = item.Author__c;
+                book.Author_Name = item.Author__r.Name;
                 book.Category__c = item.Category__c;
                 book.Price__c = item.Price__c;
                 book.ISBN__c = item.ISBN__c;
