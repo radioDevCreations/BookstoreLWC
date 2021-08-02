@@ -1,7 +1,11 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
+import showDetails from "@salesforce/messageChannel/showDetails__c";
+import { publish, MessageContext } from 'lightning/messageService';
 
 export default class BookTile extends LightningElement {
     @api bookDetails;
+
+    @wire(MessageContext) messageContext;
 
     get priceAfterDiscount(){
         if(this.bookDetails.Discount__c && this.bookDetails.Discount__c > 0){
@@ -11,7 +15,14 @@ export default class BookTile extends LightningElement {
         }
     }
 
-    handleBuyButtonClick(){
-        window.console.log('Book buyed');
+    handleShowDetailsButtonClick(event){
+        event.preventDefault();
+        const bookId = this.bookDetails.Id;
+
+        const messagePayload = {
+            bookId: bookId,
+        }
+
+        publish(this.messageContext, showDetails, messagePayload);
     }
 }

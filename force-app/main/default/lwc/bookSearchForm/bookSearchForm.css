@@ -6,3 +6,7 @@
 .books-grid{
     color: black;
 }
+
+lightning-layout-item{
+    display: inline-block;
+}

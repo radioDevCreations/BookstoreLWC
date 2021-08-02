@@ -1,0 +1,23 @@
+  .label {
+      font-weight: bold;
+      display: block;
+    }
+  
+  .bookproperty {
+    margin-bottom: 3px;
+  }
+  
+  .book{
+    border-radius: 5px;
+    height: 200px;
+  }
+
+  .price{
+    font-size: 20px;
+  }
+  .current-price{
+    color: orange;
+  }
+  .last-price{
+    color: grey;
+  }

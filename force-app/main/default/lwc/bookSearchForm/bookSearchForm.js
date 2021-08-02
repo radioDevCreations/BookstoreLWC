@@ -1,4 +1,4 @@
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, track, wire} from 'lwc';
 import getCategories from '@salesforce/apex/bookSearchFormController.getCategories';
 
 export default class BookSearchForm extends LightningElement {
@@ -26,7 +26,7 @@ export default class BookSearchForm extends LightningElement {
         this.dispatchEvent(selectedCategoryChangeEvent);
     }
 
-    handleTypedTitleChange(event){
+    handleSearchboxChange(event){
         const keyword = event.detail.value;
 
         const searchByKeywordChangeEvent = new CustomEvent('searchbykeywordchange', {detail: keyword});

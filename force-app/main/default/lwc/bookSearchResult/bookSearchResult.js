@@ -1,46 +1,53 @@
-import { LightningElement, wire, track, api } from 'lwc';
-import getAllBooks from '@salesforce/apex/bookSearchResultController.getAllBooks';
-import ShowToastEvent from 'lightning/platformShowToastEvent';
+import { LightningElement, track, api } from 'lwc';
 
 export default class BookSearchResults extends LightningElement {
     @api selectedCategoryId;
-    @api searchedKeyword;
+    @api results;
 
-    allBooks;
+    @track currentPage = 1;
+    resultsPerPage = 12;
+    numberOfPages = 1;
 
-    @wire(getAllBooks, {selectedCategoryId: '$selectedCategoryId'})
-    wirdeBooks({data, error}){
-        if(data){
-            this.allBooks = []
-            data.forEach(item => {
-                const book = {};
-                book.Id = item.Id;
-                book.Name = item.Name;
-                book.Author_Name = item.Author__r.Name;
-                book.Category__c = item.Category__c;
-                book.Price__c = item.Price__c;
-                book.ISBN__c = item.ISBN__c;
-                book.PictureURL__c = item.PictureURL__c;
-                book.Discount__c = item.Discount__c;
-                this.allBooks.push(book);
-            });
-        } else if (error) {
-            this.showToast('ERROR', error.body.message, 'error')
+
+    handleNext() {
+        if(this.currentPage < this.numberOfPages){
+            this.currentPage += 1;
         }
-    };
+    }
 
-    showToast(title, message, variant){
-        const event = new ShowToastEvent({
-            title,
-            message,
-            variant,
-        });
-        this.dispatchEvent(event);
+    handlePrevious() {
+        if(this.currentPage > 1){
+            this.currentPage -= 1;
+        }
+    }
+
+    handleFirst() {
+        this.currentPage = 1;
+    }
+
+    handleLast() {
+        this.currentPage = this.numberOfPages;
     }
 
     get booksFound(){
-        return !!this.allBooks;
+        return !!this.results;
     }
 
+    get paginationActive(){
+        return this.results && this.results.length > this.resultsPerPage;
+    }
 
+    get firstButtonAndPreviousButtonDisplayed() {
+        return this.currentPage > 1;
+    }
+    get lastButtonAndNextButtonDisplayed() {
+        return this.currentPage < this.numberOfPages;
+    }
+
+    get paginatedResults() {
+        this.numberOfPages = this.results && Math.ceil(this.results.length / this.resultsPerPage);
+        const begin = (this.currentPage - 1) * parseInt(this.resultsPerPage);
+        const end = parseInt(begin) + parseInt(this.resultsPerPage);
+        return this.results.slice(begin, end);
+    }
 }

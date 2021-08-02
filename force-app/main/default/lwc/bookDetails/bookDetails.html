@@ -1,0 +1,21 @@
+<template>
+    <template if:true={bookFound}>
+        <lightning-card title="Book Details">
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="12">
+                    <lightning-tabset active-tab-value={selectedTabValue}>
+                        <lightning-tab label="Book Preview" value="BOOK_PREVIEW_TAB" onactive={handleTabChange}>
+                            <c-book-preview book={selectedBook}></c-book-preview>
+                        </lightning-tab>
+                        <lightning-tab label="Opinions &amp; Grades" value="BOOK_GRADES_TAB" onactive={handleTabChange}>
+
+                        </lightning-tab>
+                        <lightning-tab label="About Author" value="BOOK_AUTHOR_TAB" onactive={handleTabChange}>
+
+                        </lightning-tab>
+                    </lightning-tabset>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-card>
+    </template>
+</template>

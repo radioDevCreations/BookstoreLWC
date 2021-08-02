@@ -2,15 +2,15 @@
     
     <div class="books-browser">
         <lightning-layout horizontal-align="left">
+            <div class="slds-var-p-horizontal_medium">
                 <lightning-layout-item class="slds-align_absolute-center slds-var-m-around_small">
                     <lightning-input 
                     type="text" 
                     name="filterByTitleInput" 
-                    label="Filter by Title" 
-                    value={typedTitle}
+                    label="Filter by Title"
                     variant="label-hidden"
                     placeholder="Filter by Keyword"
-                    onchange={handleTypedTitleChange}></lightning-input> 
+                    onchange={handleSearchboxChange}></lightning-input> 
                 </lightning-layout-item>
 
                 <lightning-layout-item class="slds-align_absolute-center slds-var-m-around_small">
@@ -27,9 +27,10 @@
                 <lightning-layout-item
                     class="slds-align_absolute-center slds-var-m-around_small">
                     <lightning-button
-                    label="Create Category"
+                    label="Go to Cart"
                     onchange={handleAddNewCategory}></lightning-button> 
                 </lightning-layout-item>
+            </div>
         </lightning-layout>
     </div>
 </template>

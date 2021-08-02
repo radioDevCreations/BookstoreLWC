@@ -1,0 +1,41 @@
+<template>
+    <lightning-card  variant="Narrow"  title={bookName} icon-name="utility:knowledge_base">    
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" small-device-size="6" medium-device-size="6" large-device-size="6">
+                <div class="slds-p-horizontal_small">
+                    <div class="bookproperty">
+                        <span class="label">Price:</span>
+                        <span class="price">
+                            <strong class="current-price">{bookPriceAfterDiscount}</strong> / <del class="last-price">{bookPrice}</del>
+                        </span>
+                    </div>
+                    <div class="bookproperty">
+                        <span class="label">Author:</span>
+                        <lightning-formatted-text value={bookAuthor}> </lightning-formatted-text>
+                    </div>
+                    <div class="bookproperty">
+                        <span class="label">Category:</span>
+                        <lightning-formatted-text value={bookCategory}></lightning-formatted-text>
+                    </div>
+                    <div class="bookproperty">
+                        <span class="label">ISBN:</span>
+                        <lightning-formatted-text value={bookISBN}></lightning-formatted-text>
+                    </div>
+                    <div class="bookproperty">
+                        <span class="label">Description:</span>
+                        <lightning-formatted-text value={bookDescription}></lightning-formatted-text>
+                    </div>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="6" medium-device-size="6" large-device-size="6" class="slds-var-m-top_medium">
+                <img src={bookPictureURL} class="book slds-align_absolute-center" alt="Book Cover" />
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-var-p-around_small">
+                <lightning-button variant="brand-outline" label="Full Preview" onclick={fullPreview}></lightning-button>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-var-p-horizontal_small">
+                <lightning-button variant="brand" label="Buy" onclick={fullPreview}></lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>
