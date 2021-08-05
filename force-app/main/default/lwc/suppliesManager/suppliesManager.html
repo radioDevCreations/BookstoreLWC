@@ -1,0 +1,6 @@
+<template>
+    <lightning-card title="Supplies Manager">
+        <c-book-search-form onselectedcategorychange={handleSelectBookCategory} onsearchbykeywordchange={handleSearchByKeywordChange}></c-book-search-form>
+        <c-supplies-manager-search-result selected-category-id={selectedCategoryId} results={filteredBooks}></c-supplies-manager-search-result>  
+    </lightning-card>
+</template>

@@ -14,7 +14,7 @@
                 <h2 class="slds-var-p-vertical_small">No news found</h2>
             </template>
             <template if:true={paginationActive}>
-                <div class = "slds-align_absolute-center">
+                <div class = "slds-align_absolute-center slds-var-p-top_large">
                     <template if:true={firstButtonAndPreviousButtonDisplayed}>
                         <lightning-badge label="1" onclick={handleFirst} class="cannot-select can-click"></lightning-badge>
                     </template>
@@ -24,7 +24,7 @@
                     <template if:true={firstButtonAndPreviousButtonDisplayed}>
                         <lightning-badge label="PREVIOUS PAGE" onclick={handlePrevious} class="cannot-select can-click"></lightning-badge>
                     </template>
-                    <div class="slds-var-p-horizontal_small cannot-select">{currentPage}</div>
+                    <div class="slds-var-p-horizontal_small cannot-select"><strong>{currentPage}</strong></div>
                     <template if:true={lastButtonAndNextButtonDisplayed}>
                         <lightning-badge label="NEXT PAGE" onclick={handleNext} class="cannot-select can-click"></lightning-badge>
                     </template>

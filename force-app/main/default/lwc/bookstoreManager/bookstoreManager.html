@@ -5,17 +5,17 @@
         </lightning-card>
     </template>
     <template if:true={suppliesManagerIsOpen}>
-        <lightning-card title="Manage Bookstore Supplies" class="slds-var-p-around_small">
-            supplies manager
+        <lightning-card title="Manage Bookstore Supplies">
+            <c-supplies-manager-details></c-supplies-manager-details>
         </lightning-card>
     </template>
     <template if:true={ordersManagerIsOpen}>
-        <lightning-card title="Manage Bookstore Orders" class="slds-var-p-around_small">
+        <lightning-card title="Manage Bookstore Orders">
             orders manager
         </lightning-card>
     </template>
     <template if:true={newsEditorIsOpen}>
-        <lightning-card title="Edit News" class="slds-var-p-around_small">
+        <lightning-card title="Edit News">
             <c-news-editor></c-news-editor>
         </lightning-card>
     </template>

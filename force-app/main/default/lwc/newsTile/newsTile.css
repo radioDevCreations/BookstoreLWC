@@ -1,3 +1,9 @@
 .news{
-    border-bottom: 2px solid rgb(160, 160, 160);
+    border-bottom: 1px solid lightgray;
+}
+.title{
+    font-size: 32px;
+}
+.content{
+    font-size: 18px;
 }

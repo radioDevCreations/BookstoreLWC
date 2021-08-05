@@ -14,7 +14,7 @@ export default class EditBookTab extends LightningElement {
 
     @api bookId;
     @api objectApiName = BOOK_OBJECT;
-    fields=[
+    fields = [
         NAME_FIELD,
         PRICE_FIELD,
         PICTURE_URL_FIELD,

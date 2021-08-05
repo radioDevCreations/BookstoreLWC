@@ -1,14 +1,14 @@
 <template>
-    <div class="news" >
-        <section class="title">
+    <div class="news" onclick={handleShowDetails}>
+        <section class="title slds-var-p-vertical_small">
             {newsDetails.Name}
         </section>
-        <section>
+        <section class="content">
             {newsDetails.Content__c}
         </section>
         <template if:true={editable}>
-            <section>
-                <lightning-button variant="base" label="Show Details" title="Show Details" onclick={handleShowDetails}></lightning-button>
+            <section class="slds-var-p-vertical_small">
+                <lightning-button variant="base" label="Show Details" title="Show Details"></lightning-button>
             </section>
         </template>
     </div>

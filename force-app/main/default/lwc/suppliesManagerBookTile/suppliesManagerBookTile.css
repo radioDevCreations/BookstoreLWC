@@ -1,0 +1,33 @@
+.book{
+ display: flex;
+ align-items: center;
+ border-bottom: 1px solid lightgray;
+}
+
+.title{
+    
+}
+
+.price{
+    font-size: 18px;
+    color: black;
+}
+
+.current-price{
+    font-size: 20px;
+    color: orange;
+}
+.last-price{
+    font-size: 20px;
+    color: grey;
+}
+.quantity{
+    text-align: center;
+}
+.base-button{
+    --sds-c-button-text-color: green;
+    --sds-c-button-text-color-hover: darkgreen;
+    --sds-c-button-text-color-active: darkgreen;
+    --sds-c-button-shadow-focus: none;
+}
+
