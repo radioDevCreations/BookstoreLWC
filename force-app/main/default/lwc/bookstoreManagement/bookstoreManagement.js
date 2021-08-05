@@ -10,8 +10,6 @@ import { publish, MessageContext } from 'lightning/messageService';
 
 export default class BookstoreManagement extends LightningElement {
 
-    newsEditable = false;
-
     @track selectedTabValue;
 
     @wire(MessageContext) messageContext;

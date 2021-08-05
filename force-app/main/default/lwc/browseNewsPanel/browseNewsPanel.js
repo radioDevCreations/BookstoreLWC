@@ -1,7 +1,9 @@
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, track, wire, api } from 'lwc';
 import getAllNews from '@salesforce/apex/browseNewsPanelController.getAllNews';
 
 export default class BrowseNewsPanel extends LightningElement {
+
+    @api editable;
 
     @track searchedKeyword = '';
 

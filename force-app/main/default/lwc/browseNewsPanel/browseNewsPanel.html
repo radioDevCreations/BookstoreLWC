@@ -1,6 +1,6 @@
 <template>
     <lightning-card title="Current News">
         <c-news-search-form onsearchbykeywordchange={handleSearchByKeywordChange}></c-news-search-form>
-        <c-news-search-result results={filteredNews}></c-news-search-result>  
+        <c-news-search-result results={filteredNews} editable={editable}></c-news-search-result>  
     </lightning-card>
 </template>

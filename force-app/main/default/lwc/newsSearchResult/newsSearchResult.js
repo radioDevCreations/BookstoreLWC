@@ -2,6 +2,7 @@ import { LightningElement, api, track } from 'lwc';
 
 export default class NewsSearchResult extends LightningElement {
     @api results;
+    @api editable;
 
     @track currentPage = 1;
     resultsPerPage = 5;

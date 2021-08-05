@@ -31,7 +31,7 @@ export default class EditBookTab extends LightningElement {
             type: 'standard__objectPage',
             attributes: {
                 recordId: this.bookId,
-                objectApiName: 'Book__c',
+                objectApiName: this.objectApiName,
                 actionName: 'edit',
             }
         });

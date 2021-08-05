@@ -5,14 +5,14 @@ import { MessageContext, subscribe, unsubscribe, APPLICATION_SCOPE } from 'light
 
 import NEWS_ID from '@salesforce/schema/News__c.Id';
 import NEWS_NAME from '@salesforce/schema/News__c.Name';
-import NEWS_CONTENT from '@salesforce/schema/Book__c.News__c.Name';
-import NEWS_PUBLICATION_DATE from '@salesforce/schema/News__c.Price__c';
+import NEWS_CONTENT from '@salesforce/schema/News__c.Content__c';
+import NEWS_PUBLICATION_DATE from '@salesforce/schema/News__c.Publication_Date__c';
 
 const fields = [
     NEWS_ID,
     NEWS_NAME,
-    NEWS_CATEGORY,
-    NEWS_PRICE,
+    NEWS_CONTENT,
+    NEWS_PUBLICATION_DATE,
 ]
 
 export default class NewsEditor extends LightningElement {
@@ -51,15 +51,6 @@ export default class NewsEditor extends LightningElement {
         if(message){
         this.selectedNewsId = message.newsId;
         }
-    }
-
-    handleReviewAdded(){
-        const newsReviewsComponent = this.template.querySelector('c-news-reviews-and-rates');
-        if(newsReviewsComponent){
-            newsReviewsComponent.getNewsReviews();
-        }
-
-        this.selectedTabValue = 'NEWS_REVIEWS_TAB';
     }
 
     get newsFound(){

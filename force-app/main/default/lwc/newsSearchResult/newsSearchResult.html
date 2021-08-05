@@ -6,7 +6,7 @@
                 <div class="slds-grid slds-wrap slds-size_full">
                     <template for:each={paginatedResults} for:item="news">
                             <c-news-tile key={news.Id} news-details={news} 
-                            class="slds-size_1-of-1"></c-news-tile>
+                            class="slds-size_1-of-1" editable={editable}></c-news-tile>
                     </template>
                 </div>
             </template>

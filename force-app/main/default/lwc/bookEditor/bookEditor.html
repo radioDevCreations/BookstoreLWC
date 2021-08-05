@@ -10,8 +10,8 @@
                             <lightning-tab label="Edit This Book" value="BOOK_EDIT_TAB" onactive={handleTabChange}>
                                 <c-edit-book-tab book-id={selectedBookId}></c-edit-book-tab>
                             </lightning-tab>
-                            <lightning-tab label="Delete This Book" value="BOOK_DLEETE_TAB" onactive={handleTabChange}>
-                                <c-delete-book-tab book-id={selectedBookId}></c-delete-book-tab>
+                            <lightning-tab label="Delete This Book" value="BOOK_DELETE_TAB" onactive={handleTabChange}>
+                                <c-delete-record-tab record-id={selectedBookId} label="Delete Book"></c-delete-record-tab>
                             </lightning-tab>
                             <lightning-tab label="Book Preview" value="BOOK_PREVIEW_TAB" onactive={handleTabChange}>
                                 <c-book-preview book={selectedBook}></c-book-preview>

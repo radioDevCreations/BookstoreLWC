@@ -2,14 +2,15 @@ import { LightningElement, api } from 'lwc';
 import { deleteRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
-export default class DeleteBookTab extends LightningElement {
+export default class DeleteRecordTab extends LightningElement {
 
-    @api bookId;
+    @api recordId;
+    @api label;
 
-    handleDeleteBook(){
-        deleteRecord(this.bookId)
-        .then(() => this.showToast('SUCCESS', 'Book successfully deleted!', 'success'))
-        .catch(error => this.showToast('ERROR', error.body.message + 'XD', 'error'));
+    handleDeleteRecord(){
+        deleteRecord(this.recordId)
+        .then(() => this.showToast('SUCCESS', 'Record successfully deleted!', 'success'))
+        .catch(error => this.showToast('ERROR', error.body.message, 'error'));
     }
 
     showToast(title, message, variant) {

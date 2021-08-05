@@ -1,20 +1,17 @@
 <template>
-    <lightning-card title="Book Details">
+    <lightning-card title="News Editor">
         <lightning-layout multiple-rows>
             <lightning-layout-item size="12">
                 <lightning-tabset variant="scoped" active-tab-value={selectedTabValue}>
-                    <lightning-tab label="Add New Book" value="BOOK_ADD_TAB" onactive={handleTabChange}>
-                        <c-add-new-book-tab></c-add-new-book-tab>
+                    <lightning-tab label="Add News" value="NEWS_ADD_TAB" onactive={handleTabChange}>
+                        <c-add-new-news-tab></c-add-new-news-tab>
                     </lightning-tab>
-                    <template if:true={bookFound}>
-                        <lightning-tab label="Edit This Book" value="BOOK_EDIT_TAB" onactive={handleTabChange}>
-                            <c-edit-book-tab book-id={selectedBookId}></c-edit-book-tab>
+                    <template if:true={newsFound}>
+                        <lightning-tab label="Edit This News" value="NEWS_EDIT_TAB" onactive={handleTabChange}>
+                            <c-edit-news-tab news-id={selectedNewsId}></c-edit-news-tab>
                         </lightning-tab>
-                        <lightning-tab label="Delete This Book" value="BOOK_DLEETE_TAB" onactive={handleTabChange}>
-                            <c-delete-book-tab book-id={selectedBookId}></c-delete-book-tab>
-                        </lightning-tab>
-                        <lightning-tab label="Book Preview" value="BOOK_PREVIEW_TAB" onactive={handleTabChange}>
-                            <c-book-preview book={selectedBook}></c-book-preview>
+                        <lightning-tab label="Delete This News" value="NEWS_DELETE_TAB" onactive={handleTabChange}>
+                            <c-delete-record-tab record-id={selectedNewsId} label="Delete News"></c-delete-record-tab>
                         </lightning-tab>
                     </template>
                 </lightning-tabset>
