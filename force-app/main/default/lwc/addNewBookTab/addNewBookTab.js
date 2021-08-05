@@ -9,6 +9,11 @@ export default class AddNewBookTab extends NavigationMixin(LightningElement) {
             attributes: {
                 objectApiName: 'Book__c',
                 actionName: 'new',
+            },
+            state: {
+                nooverride: 1,
+                navigationLocation: 'RELATED_LIST',
+
             }
         });
     }

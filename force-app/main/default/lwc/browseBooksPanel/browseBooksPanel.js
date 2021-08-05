@@ -41,7 +41,8 @@ export default class BrowseBooksPanel extends LightningElement {
         if(this.searchedKeyword.length){
             return this.allBooks.filter(book => {
                 return book.Name.toLowerCase().includes(this.searchedKeyword.toLowerCase()) 
-                || book.Author_Name.toLowerCase().includes(this.searchedKeyword.toLowerCase());
+                || book.Author_Name.toLowerCase().includes(this.searchedKeyword.toLowerCase())
+                || book.ISBN__c.toLowerCase().includes(this.searchedKeyword.toLowerCase());
             });
         } else {
             return this.allBooks;

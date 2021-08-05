@@ -3,11 +3,11 @@
         <section class="title slds-var-p-vertical_small">
             {newsDetails.Name}
         </section>
-        <section class="content">
+        <section class="content slds-var-p-bottom_small">
             {newsDetails.Content__c}
         </section>
         <template if:true={editable}>
-            <section class="slds-var-p-vertical_small">
+            <section class="slds-var-p-bottom_small">
                 <lightning-button variant="base" label="Show Details" title="Show Details"></lightning-button>
             </section>
         </template>

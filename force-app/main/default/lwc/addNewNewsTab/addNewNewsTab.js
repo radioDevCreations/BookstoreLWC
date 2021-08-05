@@ -9,6 +9,11 @@ export default class AddNewNewsTab extends NavigationMixin(LightningElement) {
             attributes: {
                 objectApiName: 'News__c',
                 actionName: 'new',
+            },
+            state: {
+                nooverride: 1,
+                navigationLocation: 'RELATED_LIST',
+
             }
         });
     }
