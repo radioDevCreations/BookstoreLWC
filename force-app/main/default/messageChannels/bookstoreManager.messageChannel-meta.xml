@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Show Details Channel</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Message channel between bookTile and bookEditor</description>
+    <lightningMessageFields>
+        <fieldName>bookstoreManagementTab</fieldName>
+        <description>bookstoreManagementTab message</description>
+    </lightningMessageFields>
+</LightningMessageChannel>

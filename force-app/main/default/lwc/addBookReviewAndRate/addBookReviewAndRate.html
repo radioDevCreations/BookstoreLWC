@@ -1,0 +1,24 @@
+<template>
+    <lightning-layout multiple-rows>
+        <lightning-layout-item size="12" padding="around-small">
+            <lightning-input label="Title" onchange={handleTitleChange}></lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" padding="around-small">
+            <lightning-input-rich-text label="Description" onchange={handleDescriptionChange} ></lightning-input-rich-text>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" padding="around-small">
+            <h3 class="rate-title">Your rate</h3>
+            <template for:each={stars} for:item="star">
+                <lightning-icon
+                    data-value={star.value}
+                    icon-name="utility:favorite" 
+                    class={star.classValue}
+                    key={star.value}
+                    onclick={handleChooseRate}></lightning-icon>
+            </template>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" padding="around-small">
+            <lightning-button class="slds-m-top_small" variant="brand" label="Add review" onclick={addReview} ></lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

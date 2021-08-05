@@ -1,0 +1,24 @@
+<template>
+        <lightning-card title="Book Details">
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="12">
+                    <lightning-tabset variant="scoped" active-tab-value={selectedTabValue}>
+                        <lightning-tab label="Add New Book" value="BOOK_ADD_TAB" onactive={handleTabChange}>
+                            <c-add-new-book-tab></c-add-new-book-tab>
+                        </lightning-tab>
+                        <template if:true={bookFound}>
+                            <lightning-tab label="Edit This Book" value="BOOK_EDIT_TAB" onactive={handleTabChange}>
+                                <c-edit-book-tab book-id={selectedBookId}></c-edit-book-tab>
+                            </lightning-tab>
+                            <lightning-tab label="Delete This Book" value="BOOK_DLEETE_TAB" onactive={handleTabChange}>
+                                <c-delete-book-tab book-id={selectedBookId}></c-delete-book-tab>
+                            </lightning-tab>
+                            <lightning-tab label="Book Preview" value="BOOK_PREVIEW_TAB" onactive={handleTabChange}>
+                                <c-book-preview book={selectedBook}></c-book-preview>
+                            </lightning-tab>
+                        </template>
+                    </lightning-tabset>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-card>
+</template>

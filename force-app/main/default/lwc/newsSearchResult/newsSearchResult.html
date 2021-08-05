@@ -1,0 +1,41 @@
+<template>
+    <lightning-layout class="slds-size_full">
+        <lightning-layout-item class="slds-var-p-around_medium books-grid slds-size_full">
+            <template if:true={newsFound}>
+                <h2 class="slds-var-p-vertical_small">Searching Result</h2>
+                <div class="slds-grid slds-wrap slds-size_full">
+                    <template for:each={paginatedResults} for:item="news">
+                            <c-news-tile key={news.Id} news-details={news} 
+                            class="slds-size_1-of-1"></c-news-tile>
+                    </template>
+                </div>
+            </template>
+            <template if:false={newsFound}>
+                <h2 class="slds-var-p-vertical_small">No news found</h2>
+            </template>
+            <template if:true={paginationActive}>
+                <div class = "slds-align_absolute-center">
+                    <template if:true={firstButtonAndPreviousButtonDisplayed}>
+                        <lightning-badge label="1" onclick={handleFirst} class="cannot-select can-click"></lightning-badge>
+                    </template>
+                    <template if:true={firstButtonAndPreviousButtonDisplayed}>
+                        <div class="slds-var-p-horizontal_small cannot-select">...</div>
+                    </template>
+                    <template if:true={firstButtonAndPreviousButtonDisplayed}>
+                        <lightning-badge label="PREVIOUS PAGE" onclick={handlePrevious} class="cannot-select can-click"></lightning-badge>
+                    </template>
+                    <div class="slds-var-p-horizontal_small cannot-select">{currentPage}</div>
+                    <template if:true={lastButtonAndNextButtonDisplayed}>
+                        <lightning-badge label="NEXT PAGE" onclick={handleNext} class="cannot-select can-click"></lightning-badge>
+                    </template>
+                    <template if:true={lastButtonAndNextButtonDisplayed}>
+                        <div class="slds-var-p-horizontal_small cannot-select">...</div>
+                    </template>
+                    <template if:true={lastButtonAndNextButtonDisplayed}>
+                        <lightning-badge label={numberOfPages} onclick={handleLast} class="cannot-select can-click"></lightning-badge>
+                    </template>
+                </div>
+            </template>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

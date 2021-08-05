@@ -61,7 +61,7 @@ export default class BookDetails extends LightningElement {
 
     handleSelectedBookId(message){
         if(message){
-            this.selectedBookId = message.bookId;
+        this.selectedBookId = message.bookId;
         }
     }
 

@@ -1,0 +1,17 @@
+<template>
+    <div class="books-browser">
+        <lightning-layout horizontal-align="left">
+            <div class="slds-var-p-horizontal_medium">
+                <lightning-layout-item class="slds-align_absolute-center slds-var-m-around_small">
+                    <lightning-input 
+                    type="text" 
+                    name="filterByKeywordInput" 
+                    label="Filter By Keyword"
+                    variant="label-hidden"
+                    placeholder="Filter by Keyword"
+                    onchange={handleSearchboxChange}></lightning-input> 
+                </lightning-layout-item>
+            </div>
+        </lightning-layout>
+    </div>
+</template>

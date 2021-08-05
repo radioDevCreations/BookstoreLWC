@@ -1,0 +1,28 @@
+<template>
+    <lightning-card class="bookstore-management">
+        <header class="bookstore-management__header">
+            <h3 class="bookstore-management__title slds-var-p-around_small">
+                Bookstore management
+            </h3>
+            <h2 class="bookstore-management__subtitle slds-var-p-vertical_small slds-var-p-horizontal_medium">
+                Logged as <a class="link-to-user-page" onclick={handleNavigateToUserPage}>{userFirstName} {userLastName}</a>
+            </h2>
+        </header>
+        <section class="bookstore-management__content">
+            <lightning-tabset variant="scoped" active-tab-value={selectedTabValue}>
+                <lightning-tab label="Books Editor" value="BOOK_EDITOR" onactive={handleTabChange}>
+                    <c-browse-books-panel></c-browse-books-panel>
+                </lightning-tab>
+                <lightning-tab label="Supplies Manager" value="SUPPLIES_MANAGER" onactive={handleTabChange}>
+                    Supplies Management
+                </lightning-tab>
+                <lightning-tab label="Orders Manager" value="ORDERS_MANAGER" onactive={handleTabChange}>
+                    Orders Management
+                </lightning-tab>
+                <lightning-tab label="News Editor" value="NEWS_EDITOR" onactive={handleTabChange}>
+                    News Editor
+                </lightning-tab>
+            </lightning-tabset>
+        </section>
+    </lightning-card>
+</template>

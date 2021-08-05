@@ -1,0 +1,22 @@
+<template>
+    <template if:true={bookEditorIsOpen}>
+        <lightning-card title="Add, Edit and Delete Book...">
+            <c-book-editor></c-book-editor>
+        </lightning-card>
+    </template>
+    <template if:true={suppliesManagerIsOpen}>
+        <lightning-card title="Manage Bookstore Supplies" class="slds-var-p-around_small">
+            supplies manager
+        </lightning-card>
+    </template>
+    <template if:true={ordersManagerIsOpen}>
+        <lightning-card title="Manage Bookstore Orders" class="slds-var-p-around_small">
+            orders manager
+        </lightning-card>
+    </template>
+    <template if:true={newsEditorIsOpen}>
+        <lightning-card title="Edit News" class="slds-var-p-around_small">
+            news editor
+        </lightning-card>
+    </template>
+</template>

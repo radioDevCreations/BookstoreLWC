@@ -1,0 +1,18 @@
+.bookstore-management{
+
+}
+.bookstore-management__header{
+    position: relative;
+}
+.bookstore-management__title{
+}
+.bookstore-management__subtitle{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.bookstore-management__content{
+}
+.link-to-user-page{
+    color: #03b1fc;
+}

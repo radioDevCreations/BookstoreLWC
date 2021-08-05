@@ -3,15 +3,18 @@
         <lightning-card title="Book Details">
             <lightning-layout multiple-rows>
                 <lightning-layout-item size="12">
-                    <lightning-tabset active-tab-value={selectedTabValue}>
+                    <lightning-tabset variant="scoped" active-tab-value={selectedTabValue}>
                         <lightning-tab label="Book Preview" value="BOOK_PREVIEW_TAB" onactive={handleTabChange}>
                             <c-book-preview book={selectedBook}></c-book-preview>
                         </lightning-tab>
-                        <lightning-tab label="Opinions &amp; Grades" value="BOOK_GRADES_TAB" onactive={handleTabChange}>
-
-                        </lightning-tab>
                         <lightning-tab label="About Author" value="BOOK_AUTHOR_TAB" onactive={handleTabChange}>
-
+                            <c-note-about-author book={selectedBook}></c-note-about-author>
+                        </lightning-tab>
+                        <lightning-tab label="Opinions &amp; Rates" value="BOOK_REVIEWS_TAB" onactive={handleTabChange}>
+                            <c-book-reviews-and-rates book-id={selectedBookId}></c-book-reviews-and-rates>
+                        </lightning-tab>
+                        <lightning-tab label="Share Your Review" value="BOOK_ADD_REVIEW_TAB" onactive={handleTabChange}>
+                            <c-add-book-review-and-rate book-id={selectedBookId} onnewreviewadded={handleReviewAdded}></c-add-book-review-and-rate>
                         </lightning-tab>
                     </lightning-tabset>
                 </lightning-layout-item>

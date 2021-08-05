@@ -1,0 +1,12 @@
+.books-browser{
+    height: 100%;
+    display: flex;
+}
+
+.books-grid{
+    color: black;
+}
+
+lightning-layout-item{
+    display: inline-block;
+}
