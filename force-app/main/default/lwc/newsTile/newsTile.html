@@ -3,8 +3,13 @@
         <section class="title">
             {newsDetails.Name}
         </section>
-        <section >
+        <section>
             {newsDetails.Content__c}
         </section>
+        <template if:true={editable}>
+            <section>
+                <lightning-button variant="base" label="Show Details" title="Show Details" onclick={handleShowDetails}></lightning-button>
+            </section>
+        </template>
     </div>
 </template>

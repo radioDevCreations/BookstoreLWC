@@ -7,4 +7,8 @@
         <fieldName>bookId</fieldName>
         <description>bookId message</description>
     </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>newsId</fieldName>
+        <description>newsId message</description>
+    </lightningMessageFields>
 </LightningMessageChannel>
