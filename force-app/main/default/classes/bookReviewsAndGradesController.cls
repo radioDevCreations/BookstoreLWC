@@ -4,7 +4,6 @@ public with sharing class bookReviewsAndGradesController {
         return [SELECT Id,
                     Name,
                     Review__c,
-                    Rate__c,
                     LastModifiedDate,
                     CreatedDate,
                     CreatedBy.Name,

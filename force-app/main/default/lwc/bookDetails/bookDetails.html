@@ -5,7 +5,7 @@
                 <lightning-layout-item size="12">
                     <lightning-tabset variant="scoped" active-tab-value={selectedTabValue}>
                         <lightning-tab label="Book Preview" value="BOOK_PREVIEW_TAB" onactive={handleTabChange}>
-                            <c-book-preview book={selectedBook}></c-book-preview>
+                            <c-book-preview book={selectedBook} customer></c-book-preview>
                         </lightning-tab>
                         <lightning-tab label="About Author" value="BOOK_AUTHOR_TAB" onactive={handleTabChange}>
                             <c-note-about-author book={selectedBook}></c-note-about-author>

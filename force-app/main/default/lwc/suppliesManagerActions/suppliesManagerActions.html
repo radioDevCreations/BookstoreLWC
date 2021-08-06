@@ -1,0 +1,12 @@
+<template>
+    <template if:true={modeChosen}>
+        <lightning-card  variant="Narrow"  title={titleLabel}>
+            <template if:true={MODE_ADD}>
+            <c-supplies-manager-add book={selectedBook}></c-supplies-manager-add>
+            </template>
+            <template if:true={MODE_SEND}>
+                <c-supplies-manager-send book={selectedBook}></c-supplies-manager-send>
+            </template>
+        </lightning-card>
+    </template>
+</template>

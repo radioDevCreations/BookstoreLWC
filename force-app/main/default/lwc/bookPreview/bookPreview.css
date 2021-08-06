@@ -1,4 +1,4 @@
-  .label {
+.label {
       font-weight: bold;
       display: block;
     }
@@ -20,4 +20,7 @@
   }
   .last-price{
     color: grey;
+  }
+  .active{
+    --sds-c-button-color-background-focus: #bb00ff;
   }

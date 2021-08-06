@@ -1,3 +1,7 @@
 <template>
-    
+    <template if:true={bookFound}>
+        <lightning-card  variant="Narrow"  title="Supply Details" icon-name="standard:buyer_account">
+            <c-book-preview book={selectedBook} selected-mode={selectedMode} supplies></c-book-preview>
+        </lightning-card>
+    </template>
 </template>

@@ -1,9 +1,16 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
+import bookstoreManager from "@salesforce/messageChannel/bookstoreManager__c";
+import { publish, MessageContext } from 'lightning/messageService';
 
 export default class BookPreview extends NavigationMixin(LightningElement) {
 
     @api book;
+    @api supplies;
+    @api customer;
+    @api selectedMode;
+
+    @wire(MessageContext) messageContext;
 
     fullPreview(){
         this[NavigationMixin.Navigate]({
@@ -61,14 +68,20 @@ export default class BookPreview extends NavigationMixin(LightningElement) {
         }
     }
 
-    get bookPriceAfterDiscount() {
+    get priceAfterDiscount(){
         try {
-            return (this.book.data.fields.Price__c.value - this.book.data.fields.Discount__c.value) + '\u20AC';
+            if(this.book.data.fields.Price_After_Discount__c.value < this.book.data.fields.Price__c.value){
+                return this.book.data.fields.Price_After_Discount__c.value;
+            } else {
+                return undefined;
+            }
         } catch (error) {
             console.log(error);
             return 'NA';
         }
     }
+
+
 
     get bookDescription() {
             try {
@@ -86,5 +99,30 @@ export default class BookPreview extends NavigationMixin(LightningElement) {
             console.log(error);
             return 'NA';
         }
+    }
+
+    handleChangeMode(event){
+        event.preventDefault();
+
+        this.selectedMode = event.target.value;
+
+        const messagePayload = {
+            suppliesManagerMode: this.selectedMode,
+        }
+
+        publish(this.messageContext, bookstoreManager, messagePayload);
+    }
+
+    get MODE_ADD(){
+        return this.selectedMode === 'MODE_ADD';
+    }
+    get MODE_SEND(){
+        return this.selectedMode === 'MODE_SEND';
+    }
+    get addButtonClass(){
+        return this.selectedMode === 'MODE_ADD' ? 'active' : '';
+    }
+    get sendButtonClass(){
+        return this.selectedMode === 'MODE_SEND' ? 'active' : '';
     }
 }

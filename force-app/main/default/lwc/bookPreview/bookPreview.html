@@ -5,9 +5,16 @@
                 <div class="slds-p-horizontal_small">
                     <div class="bookproperty">
                         <span class="label">Price:</span>
-                        <span class="price">
-                            <strong class="current-price">{bookPriceAfterDiscount}</strong> / <del class="last-price">{bookPrice}</del>
-                        </span>
+                        <template if:true={priceAfterDiscount}>
+                            <span class="price">
+                                <strong class="current-price">{priceAfterDiscount}</strong> / <del class="last-price">{bookPrice}</del>
+                            </span>
+                        </template>
+                        <template if:false={priceAfterDiscount}>
+                            <span class="price">
+                                <span>{bookPrice}</span>
+                            </span>
+                        </template>
                     </div>
                     <div class="bookproperty">
                         <span class="label">Author:</span>
@@ -21,21 +28,35 @@
                         <span class="label">ISBN:</span>
                         <lightning-formatted-text value={bookISBN}></lightning-formatted-text>
                     </div>
-                    <div class="bookproperty">
-                        <span class="label">Description:</span>
-                        <lightning-formatted-text value={bookDescription}></lightning-formatted-text>
-                    </div>
+                    <template if:false={supplies}>
+                        <div class="bookproperty">
+                            <span class="label">Description:</span>
+                            <lightning-formatted-text value={bookDescription}></lightning-formatted-text>
+                        </div>
+                    </template>
                 </div>
             </lightning-layout-item>
             <lightning-layout-item size="12" small-device-size="6" medium-device-size="6" large-device-size="6" class="slds-var-m-top_medium">
                 <img src={bookPictureURL} class="book slds-align_absolute-center" alt="Book Cover" />
             </lightning-layout-item>
-            <lightning-layout-item size="12" class="slds-var-p-around_small">
-                <lightning-button variant="brand-outline" label="Full Preview" onclick={fullPreview}></lightning-button>
-            </lightning-layout-item>
-            <lightning-layout-item size="12" class="slds-var-p-horizontal_small">
-                <lightning-button variant="brand" label="Buy" onclick={fullPreview}></lightning-button>
-            </lightning-layout-item>
+            <template if:false={supplies}>
+                <template if:true={customer}>
+                    <lightning-layout-item size="12" class="slds-var-p-around_small">
+                        <lightning-button variant="brand-outline" label="Full Preview" onclick={fullPreview}></lightning-button>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" class="slds-var-p-horizontal_small">
+                        <lightning-button variant="brand" label="Buy" onclick={fullPreview}></lightning-button>
+                    </lightning-layout-item>
+                </template>
+            </template>
+            <template if:true={supplies}>
+                <lightning-layout-item size="12" class="slds-var-p-horizontal_large slds-var-p-vertical_medium">
+                    <lightning-button-group>
+                            <lightning-button variant="brand-outline" label="Add Supply" value="MODE_ADD" onclick={handleChangeMode} class={addButtonClass}></lightning-button>
+                            <lightning-button variant="brand-outline" label="Send Supply" value="MODE_SEND" onclick={handleChangeMode} class={sendButtonClass}></lightning-button>
+                    </lightning-button-group>
+                </lightning-layout-item>
+            </template>
         </lightning-layout>
     </lightning-card>
 </template>

@@ -7,4 +7,8 @@
         <fieldName>bookstoreManagementTab</fieldName>
         <description>bookstoreManagementTab message</description>
     </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>suppliesManagerMode</fieldName>
+        <description>suppliesManagerMode message</description>
+    </lightningMessageFields>
 </LightningMessageChannel>

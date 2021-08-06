@@ -8,8 +8,8 @@ export default class BookTile extends LightningElement {
     @wire(MessageContext) messageContext;
 
     get priceAfterDiscount(){
-        if(this.bookDetails.Discount__c && this.bookDetails.Discount__c > 0){
-            return this.bookDetails.Price__c - this.bookDetails.Discount__c;
+        if(this.bookDetails.Price_After_Discount__c < this.bookDetails.Price__c){
+            return this.bookDetails.Price_After_Discount__c;
         } else {
             return undefined;
         }

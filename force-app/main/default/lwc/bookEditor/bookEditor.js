@@ -9,7 +9,7 @@ import BOOK_CATEGORY from '@salesforce/schema/Book__c.Category__r.Name';
 import BOOK_PRICE from '@salesforce/schema/Book__c.Price__c';
 import BOOK_ISBN from '@salesforce/schema/Book__c.ISBN__c';
 import BOOK_PICTURE_URL from '@salesforce/schema/Book__c.PictureURL__c';
-import BOOK_DISCOUNT from '@salesforce/schema/Book__c.Discount__c';
+import BOOK_PRICE_AFTER_DISCOUNT from '@salesforce/schema/Book__c.Price_After_Discount__c';
 import BOOK_DESCRIPTION from '@salesforce/schema/Book__c.Description__c';
 import BOOK_AUTHOR_NAME from '@salesforce/schema/Book__c.Author__r.Name';
 import BOOK_AUTHOR_DESCRIPTION from '@salesforce/schema/Book__c.Author__r.Description__c';
@@ -21,7 +21,7 @@ const fields = [
     BOOK_PRICE,
     BOOK_ISBN,
     BOOK_PICTURE_URL,
-    BOOK_DISCOUNT,
+    BOOK_PRICE_AFTER_DISCOUNT,
     BOOK_DESCRIPTION,
     BOOK_AUTHOR_NAME,
     BOOK_AUTHOR_DESCRIPTION

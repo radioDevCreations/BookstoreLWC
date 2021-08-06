@@ -11,7 +11,7 @@ export default class BrowseBooksPanel extends LightningElement {
     @wire(getAllBooks, {selectedCategoryId: '$selectedCategoryId'})
     wirdeBooks({data, error}){
         if(data){
-            this.allBooks = []
+            this.allBooks = [];
             data.forEach(item => {
                 const book = {};
                 book.Id = item.Id;
@@ -21,7 +21,7 @@ export default class BrowseBooksPanel extends LightningElement {
                 book.Price__c = item.Price__c;
                 book.ISBN__c = item.ISBN__c;
                 book.PictureURL__c = item.PictureURL__c;
-                book.Discount__c = item.Discount__c;
+                book.Price_After_Discount__c = item.Price_After_Discount__c;
                 this.allBooks.push(book);
             });
         } else if (error) {
@@ -48,4 +48,4 @@ export default class BrowseBooksPanel extends LightningElement {
             return this.allBooks;
         }
     }
-} 
+}

@@ -50,4 +50,4 @@ export default class SuppliesManager extends LightningElement {
             return this.allBooks;
         }
     }
-} 
+}
