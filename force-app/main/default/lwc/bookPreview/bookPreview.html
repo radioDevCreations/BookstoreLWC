@@ -16,6 +16,13 @@
                             </span>
                         </template>
                     </div>
+                    <template if:true={supplies}>
+                        <div class="bookproperty">
+                            <span class="quantity">
+                                Quantity: <strong class="current-quantity">{bookQuantity}</strong>
+                            </span>
+                        </div>
+                    </template>
                     <div class="bookproperty">
                         <span class="label">Author:</span>
                         <lightning-formatted-text value={bookAuthor}> </lightning-formatted-text>

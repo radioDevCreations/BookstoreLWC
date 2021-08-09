@@ -1,3 +1,38 @@
 <template>
-    supplies manager add
+    <div class="slds-var-p-horizontal_medium slds-var-p-top_small">
+        Book quantity: {bookQuantity}
+    </div>
+    <div class="slds-var-p-horizontal_medium slds-var-p-top_small">
+        Quick Actions
+    </div>
+    <lightning-button-group class="slds-var-p-around_medium">
+        <lightning-button 
+        variant="brand-outline" 
+        label="Add 1 Supply" 
+        title="Add 1 Supply" 
+        onclick={handleAddSingleSupplyClick} 
+        class="quantity-send-button"></lightning-button>
+        <lightning-button 
+        variant="brand-outline" 
+        label="Add 10 Supplies" 
+        title="Add 10 Supplies" 
+        onclick={handleAddTenSuppliesClick} 
+        class="quantity-send-button"></lightning-button>    
+        </lightning-button-group>
+    <div class="slds-var-p-horizontal_medium slds-var-p-top_small">
+        Custom Action
+    </div>
+    <lightning-input 
+    value={operatingQuantity} 
+    type="number" 
+    class="quantity-add-input slds-var-p-around_medium" 
+    label="Quantity" 
+    variant="label-hidden"
+    onchange={handleOperatingQuantityChange}></lightning-input>
+    <lightning-button 
+    variant="brand" 
+    label="Add Supplies" 
+    title="Add Supplies" 
+    onclick={handleAddSuppliesClick} 
+    class="quantity-add-button slds-var-p-around_medium"></lightning-button>
 </template>

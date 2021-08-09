@@ -24,3 +24,10 @@
   .active{
     --sds-c-button-color-background-focus: #bb00ff;
   }
+
+  .quantity{
+    font-size:  18px;
+  }
+  .current-quantity{
+    font-weight: 600;
+  }

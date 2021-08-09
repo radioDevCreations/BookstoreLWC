@@ -9,7 +9,7 @@ export default class BrowseBooksPanel extends LightningElement {
     allBooks;
 
     @wire(getAllBooks, {selectedCategoryId: '$selectedCategoryId'})
-    wirdeBooks({data, error}){
+    wiredBooks({data, error}){
         if(data){
             this.allBooks = [];
             data.forEach(item => {
@@ -27,6 +27,15 @@ export default class BrowseBooksPanel extends LightningElement {
         } else if (error) {
             this.showToast('ERROR', error.body.message, 'error')
         }
+    };
+
+    showToast(title, message, variant) {
+        const event = new ShowToastEvent({
+            title: title,
+            message: message,
+            variant: variant,
+        });
+        this.dispatchEvent(event);
     };
 
     handleSelectBookCategory(event){

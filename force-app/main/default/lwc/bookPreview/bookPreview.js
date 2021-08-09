@@ -1,6 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
-import bookstoreManager from "@salesforce/messageChannel/bookstoreManager__c";
+import showDetails from "@salesforce/messageChannel/showDetails__c";
 import { publish, MessageContext } from 'lightning/messageService';
 
 export default class BookPreview extends NavigationMixin(LightningElement) {
@@ -101,16 +101,26 @@ export default class BookPreview extends NavigationMixin(LightningElement) {
         }
     }
 
+    get bookQuantity(){
+        try {
+            return this.book.data.fields.Quantity__c.value;
+        } catch (error) {
+            console.log(error);
+            return 'NA';
+        }
+    }
+
     handleChangeMode(event){
         event.preventDefault();
 
         this.selectedMode = event.target.value;
 
         const messagePayload = {
+            bookId: this.book.data.fields.Id.value,
             suppliesManagerMode: this.selectedMode,
         }
 
-        publish(this.messageContext, bookstoreManager, messagePayload);
+        publish(this.messageContext, showDetails, messagePayload);
     }
 
     get MODE_ADD(){

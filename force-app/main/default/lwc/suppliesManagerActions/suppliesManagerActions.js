@@ -1,9 +1,10 @@
 import { LightningElement, track, wire } from 'lwc';
-import bookstoreManager from "@salesforce/messageChannel/bookstoreManager__c";
+import showDetails from "@salesforce/messageChannel/showDetails__c";
 import { MessageContext, subscribe, unsubscribe, APPLICATION_SCOPE } from 'lightning/messageService';
 
 export default class SuppliesManagerActions extends LightningElement {
     @track mode;
+    @track bookId;
 
     @wire(MessageContext) messageContext;
 
@@ -11,7 +12,7 @@ export default class SuppliesManagerActions extends LightningElement {
         if(!this.subscription){
             subscribe(
                 this.messageContext,
-                bookstoreManager, 
+                showDetails, 
                 message => {
                 this.handleSelectedMode(message);
                 },
@@ -21,6 +22,7 @@ export default class SuppliesManagerActions extends LightningElement {
 
     handleSelectedMode(message){
         this.mode = message.suppliesManagerMode;
+        this.bookId = message.bookId;
     }
 
     disconnectedCallback(){
@@ -39,5 +41,10 @@ export default class SuppliesManagerActions extends LightningElement {
 
     get modeChosen(){
         return !!this.mode;
+    }
+
+    get titleLabel(){
+        if(this.MODE_ADD) return 'Add Supplies';
+        else if(this.MODE_SEND) return 'Send Supplies';
     }
 }
