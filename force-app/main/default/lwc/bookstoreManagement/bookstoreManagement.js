@@ -5,7 +5,7 @@ import USER_FIRST_NAME from "@salesforce/schema/User.FirstName";
 import USER_LAST_NAME from "@salesforce/schema/User.LastName";
 import { NavigationMixin } from "lightning/navigation";
 
-import bookstoreManager from "@salesforce/messageChannel/bookstoreManager__c";
+import messageChannel from "@salesforce/messageChannel/messageChannel__c";
 import { publish, MessageContext } from 'lightning/messageService';
 
 export default class BookstoreManagement extends LightningElement {
@@ -23,9 +23,12 @@ export default class BookstoreManagement extends LightningElement {
 
         const messagePayload = {
             bookstoreManagementTab: this.selectedTabValue,
+            from: 'bookstoreManagement',
         }
 
-        publish(this.messageContext, bookstoreManager, messagePayload);
+        console.log(messagePayload.bookstoreManagementTab);
+
+        publish(this.messageContext, messageChannel, messagePayload);
     }
 
     handleNavigateToUserPage(){

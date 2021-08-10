@@ -1,5 +1,5 @@
 import { LightningElement, api, wire} from 'lwc';
-import showDetails from "@salesforce/messageChannel/showDetails__c";
+import messageChannel from "@salesforce/messageChannel/messageChannel__c";
 import { publish, MessageContext } from 'lightning/messageService';
 
 export default class NewsTile extends LightningElement {
@@ -16,6 +16,6 @@ export default class NewsTile extends LightningElement {
             newsId: newsId,
         }
 
-        publish(this.messageContext, showDetails, messagePayload);
+        publish(this.messageContext, messageChannel, messagePayload);
     }
 }

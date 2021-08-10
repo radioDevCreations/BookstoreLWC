@@ -1,5 +1,5 @@
 import { LightningElement, track, wire } from 'lwc';
-import bookstoreManager from "@salesforce/messageChannel/bookstoreManager__c";
+import messageChannel from "@salesforce/messageChannel/messageChannel__c";
 import { MessageContext, subscribe, unsubscribe, APPLICATION_SCOPE } from 'lightning/messageService';
 
 export default class BookstoreManager extends LightningElement {
@@ -12,7 +12,7 @@ export default class BookstoreManager extends LightningElement {
         if(!this.subscription){
             subscribe(
                 this.messageContext,
-                bookstoreManager, 
+                messageChannel, 
                 message => {
                 this.handleSelectedManagerComponent(message);
                 },
@@ -26,7 +26,8 @@ export default class BookstoreManager extends LightningElement {
     }
 
     handleSelectedManagerComponent(message){
-        if(message){
+        if(message && message.from === 'bookstoreManagement'){
+                console.log(message.bookstoreManagementTab);
                 this.bookstoreManagementTab = message.bookstoreManagementTab;
             }
     }

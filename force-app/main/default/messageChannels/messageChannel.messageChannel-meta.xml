@@ -3,6 +3,12 @@
     <masterLabel>Show Details Channel</masterLabel>
     <isExposed>true</isExposed>
     <description>Message channel between bookTile and bookDetails</description>
+    
+    <lightningMessageFields>
+        <fieldName>from</fieldName>
+        <description>from component name</description>
+    </lightningMessageFields>
+    
     <lightningMessageFields>
         <fieldName>bookId</fieldName>
         <description>bookId message</description>
@@ -14,5 +20,9 @@
     <lightningMessageFields>
         <fieldName>suppliesManagerMode</fieldName>
         <description>suppliesManagerMode message</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>bookstoreManagementTab</fieldName>
+        <description>bookstoreManagementTab message</description>
     </lightningMessageFields>
 </LightningMessageChannel>

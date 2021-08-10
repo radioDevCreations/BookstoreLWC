@@ -1,6 +1,7 @@
 <template>
+    <c-cart-items-info clickable></c-cart-items-info>
     <template if:true={bookFound}>
-        <lightning-card title="Book Details">
+        <lightning-card title="Book Details" class="slds-var-m-vertical_x-small">
             <lightning-layout multiple-rows>
                 <lightning-layout-item size="12">
                     <lightning-tabset variant="scoped" active-tab-value={selectedTabValue}>

@@ -1,5 +1,5 @@
 import { LightningElement, track, wire } from 'lwc';
-import showDetails from "@salesforce/messageChannel/showDetails__c";
+import messageChannel from "@salesforce/messageChannel/messageChannel__c";
 import { MessageContext, subscribe, unsubscribe, APPLICATION_SCOPE } from 'lightning/messageService';
 
 export default class SuppliesManagerActions extends LightningElement {
@@ -12,7 +12,7 @@ export default class SuppliesManagerActions extends LightningElement {
         if(!this.subscription){
             subscribe(
                 this.messageContext,
-                showDetails, 
+                messageChannel, 
                 message => {
                 this.handleSelectedMode(message);
                 },

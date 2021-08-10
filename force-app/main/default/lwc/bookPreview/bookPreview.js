@@ -1,6 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
-import showDetails from "@salesforce/messageChannel/showDetails__c";
+import messageChannel from "@salesforce/messageChannel/messageChannel__c";
 import { publish, MessageContext } from 'lightning/messageService';
 
 export default class BookPreview extends NavigationMixin(LightningElement) {
@@ -120,7 +120,7 @@ export default class BookPreview extends NavigationMixin(LightningElement) {
             suppliesManagerMode: this.selectedMode,
         }
 
-        publish(this.messageContext, showDetails, messagePayload);
+        publish(this.messageContext, messageChannel, messagePayload);
     }
 
     get MODE_ADD(){

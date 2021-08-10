@@ -1,0 +1,15 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Your products" class="slds-var-p-around_medium slds-var-m-vertical_x-small">
+        <div class="slds-var-p-horizontal_medium">
+            <template if:false={orders}>
+                Your cart is empty
+            </template>
+            <template if:true={orders}>
+                <template for:each={orders} for:item="order">
+                    <c-cart-item key={order.id} cart-item={order}></c-cart-item>
+                </template>
+                <lightning-button variant="base" label="BUY" title="BUY" onclick={handleBuyButtonClick}></lightning-button>
+            </template>
+        </div>    
+    </lightning-card>
+</template>

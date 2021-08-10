@@ -1,6 +1,6 @@
 import { LightningElement, wire, track } from 'lwc';
 import { getRecord } from 'lightning/uiRecordApi';
-import showDetails from "@salesforce/messageChannel/showDetails__c";
+import messageChannel from "@salesforce/messageChannel/messageChannel__c";
 import { MessageContext, subscribe, unsubscribe, APPLICATION_SCOPE } from 'lightning/messageService';
 
 import BOOK_ID from '@salesforce/schema/Book__c.Id';
@@ -39,7 +39,7 @@ export default class BookDetails extends LightningElement {
         if(!this.subscription){
             subscribe(
                 this.messageContext,
-                showDetails, 
+                messageChannel, 
                 message => {
                 this.handleSelectedBookId(message);
                 },

@@ -1,0 +1,19 @@
+<template>
+    <template if:true={clickable}>
+        <lightning-card  
+        variant="Narrow"  
+        title={title} 
+        icon-name="standard:webcart" 
+        onclick={handleNavigateToCartTab} 
+        class="cart-info-tile">
+        </lightning-card>
+    </template>
+
+    <template if:false={clickable}>   
+    <lightning-card  
+    variant="Narrow" 
+    title={title} 
+    icon-name="standard:webcart">
+    </lightning-card>
+    </template>
+</template>
