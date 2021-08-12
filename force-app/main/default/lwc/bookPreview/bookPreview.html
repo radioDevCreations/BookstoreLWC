@@ -49,10 +49,10 @@
             <template if:false={supplies}>
                 <template if:true={customer}>
                     <lightning-layout-item size="12" class="slds-var-p-around_small">
-                        <lightning-button variant="brand-outline" label="Full Preview" onclick={fullPreview}></lightning-button>
+                        <lightning-button variant="brand-outline" label="Full Preview" onclick={handleFullPreviewClick}></lightning-button>
                     </lightning-layout-item>
                     <lightning-layout-item size="12" class="slds-var-p-horizontal_small">
-                        <lightning-button variant="brand" label="Buy" onclick={fullPreview}></lightning-button>
+                        <lightning-button variant="brand" label="Add To Cart" onclick={handleAddToCartClick}></lightning-button>
                     </lightning-layout-item>
                 </template>
             </template>

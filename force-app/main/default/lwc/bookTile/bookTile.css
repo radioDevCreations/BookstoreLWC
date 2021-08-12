@@ -32,3 +32,7 @@
     font-size: 20px;
     color: grey;
 }
+
+.details-button{
+    --sds-c-button-shadow-focus: none;
+}

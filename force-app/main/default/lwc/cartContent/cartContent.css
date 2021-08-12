@@ -1,0 +1,9 @@
+.progress{
+    min-height: 60px;
+}
+.buy{
+    
+}
+.focus-no-shadow{
+    --sds-c-button-shadow-focus: none;
+}

@@ -8,6 +8,10 @@
         <fieldName>from</fieldName>
         <description>from component name</description>
     </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>status</fieldName>
+        <description>status for refreshing the pages</description>
+    </lightningMessageFields>
     
     <lightningMessageFields>
         <fieldName>bookId</fieldName>

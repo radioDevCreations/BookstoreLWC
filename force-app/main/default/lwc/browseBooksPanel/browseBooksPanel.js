@@ -1,15 +1,38 @@
 import { LightningElement, track, wire } from 'lwc';
 import getAllBooks from '@salesforce/apex/browseBooksPanelController.getAllBooks';
+import messageChannel from "@salesforce/messageChannel/messageChannel__c";
+import { MessageContext, subscribe, unsubscribe, APPLICATION_SCOPE } from 'lightning/messageService';
+import {refreshApex} from '@salesforce/apex';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent'
 
 export default class BrowseBooksPanel extends LightningElement {
 
     @track selectedCategoryId = '';
     @track searchedKeyword = '';
-
     allBooks;
+    subscription = null;
+    @wire(MessageContext) messageContext;
 
+    connectedCallback(){
+            this.subscription = subscribe(
+                this.messageContext,
+                messageChannel, 
+                message => {
+                this.refresh(message);
+                },
+                { scope: APPLICATION_SCOPE });
+    }
+
+    disconnectedCallback() {
+        unsubscribe(this.subscription);
+        this.subscription = null;
+    }
+
+    allBooksResponse
     @wire(getAllBooks, {selectedCategoryId: '$selectedCategoryId'})
-    wiredBooks({data, error}){
+    wiredBooks(response){
+        const {data, error} = response;
+        this.allBooksResponse = response;
         if(data){
             this.allBooks = [];
             data.forEach(item => {
@@ -44,6 +67,13 @@ export default class BrowseBooksPanel extends LightningElement {
     
     handleSearchByKeywordChange(event){
         this.searchedKeyword = event.detail;
+    }
+
+    refresh(message){
+        console.log(message);
+        if(message.status === 'refresh'){
+            refreshApex(this.allBooksResponse);
+        }
     }
 
     get filteredBooks(){

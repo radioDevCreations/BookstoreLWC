@@ -5,10 +5,43 @@
                 Your cart is empty
             </template>
             <template if:true={orders}>
-                <template for:each={orders} for:item="order">
-                    <c-cart-item key={order.id} cart-item={order}></c-cart-item>
+                <section class="progress slds-var-p-top_large">
+                    <lightning-progress-indicator current-step={step} type="base" has-error={progressHasError} variant="base">
+                        <lightning-progress-step label="Your products" value="1"></lightning-progress-step>
+                        <lightning-progress-step label="Your address" value="2"></lightning-progress-step>
+                        <lightning-progress-step label="Resume" value="3"></lightning-progress-step>
+                    </lightning-progress-indicator>
+                </section>
+                <template if:true={isFirstStep}>
+                    <template for:each={orders} for:item="order">
+                        <c-cart-item key={order.id} cart-item={order}></c-cart-item>
+                    </template>
                 </template>
-                <lightning-button variant="base" label="BUY" title="BUY" onclick={handleBuyButtonClick}></lightning-button>
+                <template if:true={isSecondStep}>
+                    <lightning-input-address
+                        address-label="Address"
+                        street-label="Street"
+                        city-label="City"
+                        country-label="Country"
+                        province-label="Province"
+                        postal-code-label="PostalCode"
+                        required
+                        field-level-help="Delivery address" ></lightning-input-address>
+                </template>
+                <template if:true={isLastStep}>
+                    this is a resume step
+                </template>
+                <lightning-button-group class="slds-align_absolute-center slds-var-p-around_medium">
+                    <template if:false={isFirstStep}>
+                        <lightning-button variant="base" label="PREVIOUS" title="PREVIOUS" class="focus-no-shadow slds-var-p-horizontal_small" onclick={handlePreviousButtonClick}></lightning-button>
+                    </template>
+                    <template if:false={isLastStep}>
+                        <lightning-button variant="base" label="NEXT" title="NEXT" class="focus-no-shadow slds-var-p-horizontal_small" onclick={handleNextButtonClick}></lightning-button>
+                    </template>
+                    <template if:true={isLastStep}>
+                        <lightning-button variant="base" label="BUY" title="BUY" class="focus-no-shadow slds-var-p-horizontal_small" onclick={handleBuyButtonClick}></lightning-button>
+                    </template>
+                </lightning-button-group>
             </template>
         </div>    
     </lightning-card>

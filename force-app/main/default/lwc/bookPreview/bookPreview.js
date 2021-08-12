@@ -2,17 +2,20 @@ import { LightningElement, api, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import messageChannel from "@salesforce/messageChannel/messageChannel__c";
 import { publish, MessageContext } from 'lightning/messageService';
+import createCartItem from '@salesforce/apex/cartController.createCartItem';
 
 export default class BookPreview extends NavigationMixin(LightningElement) {
 
     @api book;
+
+
+    @api selectedMode;
     @api supplies;
     @api customer;
-    @api selectedMode;
 
     @wire(MessageContext) messageContext;
 
-    fullPreview(){
+    handleFullPreviewClick(){
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
             attributes: {
@@ -21,6 +24,21 @@ export default class BookPreview extends NavigationMixin(LightningElement) {
                 actionName: 'view',
             }
         });
+    }
+
+    handleAddToCartClick(){
+            createCartItem({ 
+                selectedBookId: this.book.data.fields.Id.value,
+                selectedBookName: this.book.data.fields.Name.value,
+                selectedBookPrice: this.book.data.fields.Price_After_Discount__c.value,
+                selectedBookQuantity: 1,
+            }).then(() => {
+                const messagePayload = {
+                    status: 'refresh',
+                }
+                publish(this.messageContext, messageChannel, messagePayload);
+            });
+
     }
 
     get bookName() {
