@@ -14,7 +14,7 @@
                 </section>
                 <template if:true={isFirstStep}>
                     <template for:each={orders} for:item="order">
-                        <c-cart-item key={order.id} cart-item={order}></c-cart-item>
+                        <c-cart-item key={order.id} cart-item={order} editable></c-cart-item>
                     </template>
                 </template>
                 <template if:true={isSecondStep}>
@@ -24,12 +24,18 @@
                         city-label="City"
                         country-label="Country"
                         province-label="Province"
-                        postal-code-label="PostalCode"
+                        postal-code-label="Postal Code"
+                        street={streetValue}
+                        city={cityValue}
+                        country={countryValue}
+                        province={provinceValue}
+                        postal-code={postalCodeValue}
                         required
                         field-level-help="Delivery address" ></lightning-input-address>
+                        <lightning-input name="email" label="Email Address" type="email" required></lightning-input>
                 </template>
                 <template if:true={isLastStep}>
-                    this is a resume step
+                    <c-order-resume address={address} cart-items={orders}></c-order-resume>
                 </template>
                 <lightning-button-group class="slds-align_absolute-center slds-var-p-around_medium">
                     <template if:false={isFirstStep}>

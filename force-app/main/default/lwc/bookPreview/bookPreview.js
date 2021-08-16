@@ -38,7 +38,6 @@ export default class BookPreview extends NavigationMixin(LightningElement) {
                 }
                 publish(this.messageContext, messageChannel, messagePayload);
             });
-
     }
 
     get bookName() {

@@ -1,0 +1,19 @@
+<template>
+    <h1 class="title slds-var-p-horizontal_medium slds-var-p-top_large slds-var-p-bottom_small"> Address</h1>
+    <section class="slds-var-p-horizontal_medium">
+        <div class="address-field">{address.street}</div>
+        <div class="address-field">{address.city}, {address.postalCode}</div>
+        <div class="address-field">{address.province}, {address.country}</div>
+        <div class="address-field">{address.email}</div>
+    </section>
+    <section class="slds-var-p-horizontal_medium slds-var-p-vertical_large">
+        <template for:each={cartItems} for:item="cartItem">
+            <c-cart-item key={cartItem.id} cart-item={cartItem}></c-cart-item>
+        </template>
+    </section>
+    <section class="summary slds-var-p-horizontal_medium slds-var-p-vertical_large">
+        <div>
+            SUMMARY: {summaryPrice}&euro;
+        </div>
+    </section>
+</template>

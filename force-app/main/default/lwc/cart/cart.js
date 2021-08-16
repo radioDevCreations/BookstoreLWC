@@ -30,7 +30,7 @@ export default class Cart extends NavigationMixin(LightningElement) {
 
     cartItemsDataResponse
     @wire(getCartItems)
-    wiredCategories(response){
+    wiredCartItems(response){
         const {data, error} = response;
         this.cartItemsDataResponse = response;
         if(data){
@@ -41,6 +41,7 @@ export default class Cart extends NavigationMixin(LightningElement) {
                 cartItem.BookId = item.Book__r.Id;
                 cartItem.Book_Name = item.Book__r.Name;
                 cartItem.Book_Price = item.Book_Price__c;
+                cartItem.Book_Category = item.Book__r.Category__r.Name;
                 cartItem.Book_ISBN = item.Book__r.ISBN__c;
                 this.orders.push(cartItem);
             });
@@ -60,7 +61,6 @@ export default class Cart extends NavigationMixin(LightningElement) {
 
     refresh(message){
         if(message.status === 'refresh'){
-               
             if(this.orders.length == 1){
                 this[NavigationMixin.Navigate]({
                     type: 'standard__navItemPage',
@@ -69,7 +69,7 @@ export default class Cart extends NavigationMixin(LightningElement) {
                     }
                 });
             }
-            refreshApex(this.cartItemsDataResponse);
         }
+        refreshApex(this.cartItemsDataResponse);
     }
 }

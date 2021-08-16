@@ -1,12 +1,25 @@
-import {LightningElement, track, api } from 'lwc';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent'
+import {LightningElement, track, api, wire } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import messageChannel from "@salesforce/messageChannel/messageChannel__c";
+import { publish, MessageContext } from 'lightning/messageService';
+import createOrder from '@salesforce/apex/ordersController.createOrder';
+import assignCartItemsToOrder from '@salesforce/apex/cartController.assignCartItemsToOrder';
 
 export default class CartContent extends LightningElement {
     @api orders;
 
+    @track streetValue = ''; 
+    @track cityValue = ''; 
+    @track countryValue = ''; 
+    @track provinceValue = ''; 
+    @track postalCodeValue = '';
+    @track address = {}; 
+
     @track progressCurrentStep = 1;
     progressHasError = false;
    
+    @wire(MessageContext) messageContext;
+    
     handlePreviousButtonClick(){
         this.progressCurrentStep -= 1;
     }
@@ -17,10 +30,13 @@ export default class CartContent extends LightningElement {
                 this.progressCurrentStep += 1;
             }
         } else if (this.progressCurrentStep === 2){
-            const address =
-                this.template.querySelector('lightning-input-address');
+            const address = this.template.querySelector('lightning-input-address');
+            const email = this.template.querySelector('lightning-input');    
             const isValid = address.checkValidity();
-            if(isValid) {
+            
+            if(isValid && this.isEmailValid()) {
+                this.address = address;
+                this.address.email = email.value;
                 this.progressCurrentStep += 1;
             } else {
                 this.showToast('ERROR', 'Please complete all of the address fields before go to the next step!', 'error');
@@ -29,7 +45,24 @@ export default class CartContent extends LightningElement {
     }
 
     handleBuyButtonClick(){
-        console.log('buy');
+        let sum = 0;
+        this.orders.forEach(item => {
+            sum += item.Book_Price;
+        });
+        return createOrder({ 
+            email: this.address.email,
+            price: sum,
+        })
+        .then(newOrderId => {
+            const ordersToModification = this.orders.map((item) => item.Id)
+            assignCartItemsToOrder({ cartItemsIds: ordersToModification, orderId: newOrderId });
+        })
+        .then(() => {
+            const messagePayload = {
+                status: 'refresh',
+            }
+            publish(this.messageContext, messageChannel, messagePayload);
+        });
     }
 
     showToast(title, message, variant) {
@@ -40,6 +73,22 @@ export default class CartContent extends LightningElement {
         });
         this.dispatchEvent(event);
     };
+
+    isEmailValid(){
+        const emailRegex=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let email=this.template.querySelector("lightning-input");
+        let emailVal=email.value;
+        if(emailVal.match(emailRegex)){
+            email.setCustomValidity("");
+             email.reportValidity();
+            return true;
+
+        }else{
+            email.setCustomValidity("You have entered an invalid format.");
+            email.reportValidity();
+        }
+        return false;
+    }
 
     get isLastStep(){
         return this.progressCurrentStep === 3;
