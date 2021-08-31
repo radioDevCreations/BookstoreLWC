@@ -18,4 +18,8 @@ export default class NewsTile extends LightningElement {
 
         publish(this.messageContext, messageChannel, messagePayload);
     }
+
+    get publicationDate(){
+        return this.newsDetails.Publication_Date__c.slice(0, 10);
+    }
 }

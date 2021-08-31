@@ -1,24 +1,30 @@
 <template>
-    <div class="cart-item slds-var-p-around_large slds-grid">
-        <div class="slds-size_3-of-12 slds-align_absolute-center">
-            <span>{cartItem.Book_Name}</span>
+    <div class="cart-item slds-var-p-around_large slds-grid slds-wrap">
+        <div class="slds-small-size_1-of-1 slds-medium-size_2-of-12 slds-align_absolute-center">
+            <div>{cartItem.Book_Name}</div>
         </div>
-        <div class="slds-size_3-of-12 slds-align_absolute-center">
+        <div class="slds-small-size_1-of-1 slds-medium-size_2-of-12 slds-align_absolute-center">
             <span>{cartItem.Book_Price}&euro;</span>
         </div>
         <template if:true={editable}>
-            <div class="slds-size_3-of-12 slds-align_absolute-center">
-                <lightning-input type="number" variant="standard" name="quantity" label="Quantity" min="1" value={cartItemQuantity} onchange={handleQuantityInputChange} onfocusout={handleUpdateQuantity}></lightning-input>
+            <div class="slds-small-size_1-of-1 slds-medium-size_2-of-12 slds-align_absolute-center">
+                <lightning-input type="number" variant="standard" name="quantity" label="Quantity" min="1" value={cartItemQuantity}></lightning-input>
             </div>
-            <div class="slds-size_3-of-12 slds-align_absolute-center">
+            <div class="slds-small-size_1-of-1 slds-medium-size_2-of-12 slds-align_absolute-center">
                 <lightning-button variant="destructive" label="Delete" title="Delete From Cart" onclick={handleDeleteFromCart}></lightning-button>
             </div>
         </template>
         <template if:false={editable}>
-            <div class="slds-size_3-of-12 slds-align_absolute-center">
+            <div class="slds-small-size_1-of-1 slds-medium-size_2-of-12 slds-align_absolute-center">
+                <span>Quantity: {cartItem.Quantity}p</span>
+            </div>
+            <div class="slds-small-size_1-of-1 slds-medium-size_2-of-12 slds-align_absolute-center">
+                <span>Price: {cartItem.Total_Price}&euro;</span>
+            </div>
+            <div class="slds-small-size_1-of-1 slds-medium-size_2-of-12 slds-align_absolute-center">
                 <span>{cartItem.Book_Category}</span>
             </div>
-            <div class="slds-size_3-of-12 slds-align_absolute-center">
+            <div class="slds-small-size_1-of-1 slds-medium-size_2-of-12 slds-align_absolute-center">
                 <span>{cartItem.Book_ISBN}</span>
             </div>
         </template>

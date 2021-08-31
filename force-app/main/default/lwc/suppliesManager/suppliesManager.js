@@ -1,5 +1,9 @@
 import { LightningElement, track, wire } from 'lwc';
 import getAllBooks from '@salesforce/apex/browseBooksPanelController.getAllBooks';
+import messageChannel from "@salesforce/messageChannel/messageChannel__c";
+import { MessageContext, subscribe, unsubscribe, APPLICATION_SCOPE } from 'lightning/messageService';
+import { refreshApex } from '@salesforce/apex';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class SuppliesManager extends LightningElement {
 
@@ -8,8 +12,29 @@ export default class SuppliesManager extends LightningElement {
 
     allBooks;
 
+    subscription = null;
+    @wire(MessageContext) messageContext;
+
+    connectedCallback(){
+            this.subscription = subscribe(
+                this.messageContext,
+                messageChannel, 
+                message => {
+                this.refresh(message);
+                },
+                { scope: APPLICATION_SCOPE });
+    }
+
+    disconnectedCallback() {
+        unsubscribe(this.subscription);
+        this.subscription = null;
+    }
+
+    allBooksResponse
     @wire(getAllBooks, {selectedCategoryId: '$selectedCategoryId'})
-    wirdeBooks({data, error}){
+    wirdeBooks(response){
+        const {data, error} = response;
+        this.allBooksResponse = response;
         if(data){
             this.allBooks = []
             data.forEach(item => {
@@ -25,7 +50,7 @@ export default class SuppliesManager extends LightningElement {
                 book.Discount__c = item.Discount__c;
                 this.allBooks.push(book);
             });
-            console.log(this.allBooks);
+            //console.log(this.allBooks);
         } else if (error) {
             this.showToast('ERROR', error.body.message, 'error')
         }
@@ -37,6 +62,23 @@ export default class SuppliesManager extends LightningElement {
     
     handleSearchByKeywordChange(event){
         this.searchedKeyword = event.detail;
+    }
+
+    showToast(title, message, variant) {
+        const event = new ShowToastEvent({
+            title: title,
+            message: message,
+            variant: variant,
+        });
+        this.dispatchEvent(event);
+    }
+
+
+    refresh(message){
+        console.log('message');
+        if(message.status === 'refresh'){
+            refreshApex(this.allBooksResponse);
+        }
     }
 
     get filteredBooks(){

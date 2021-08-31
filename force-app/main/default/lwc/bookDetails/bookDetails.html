@@ -1,12 +1,11 @@
 <template>
-    <c-cart-items-info clickable></c-cart-items-info>
     <template if:true={bookFound}>
         <lightning-card title="Book Details" class="slds-var-m-vertical_x-small">
             <lightning-layout multiple-rows>
                 <lightning-layout-item size="12">
                     <lightning-tabset variant="scoped" active-tab-value={selectedTabValue}>
                         <lightning-tab label="Book Preview" value="BOOK_PREVIEW_TAB" onactive={handleTabChange}>
-                            <c-book-preview book={selectedBook} customer></c-book-preview>
+                            <c-book-preview book={selectedBook} customer={customerMode} all-details={allDetails}></c-book-preview>
                         </lightning-tab>
                         <lightning-tab label="About Author" value="BOOK_AUTHOR_TAB" onactive={handleTabChange}>
                             <c-note-about-author book={selectedBook}></c-note-about-author>
@@ -14,9 +13,11 @@
                         <lightning-tab label="Opinions &amp; Rates" value="BOOK_REVIEWS_TAB" onactive={handleTabChange}>
                             <c-book-reviews-and-rates book-id={selectedBookId}></c-book-reviews-and-rates>
                         </lightning-tab>
-                        <lightning-tab label="Share Your Review" value="BOOK_ADD_REVIEW_TAB" onactive={handleTabChange}>
-                            <c-add-book-review-and-rate book-id={selectedBookId} onnewreviewadded={handleReviewAdded}></c-add-book-review-and-rate>
-                        </lightning-tab>
+                        <template if:false={allDetails}>
+                            <lightning-tab label="Share Your Review" value="BOOK_ADD_REVIEW_TAB" onactive={handleTabChange}>
+                                <c-add-book-review-and-rate book-id={selectedBookId} onnewreviewadded={handleReviewAdded}></c-add-book-review-and-rate>
+                            </lightning-tab>
+                        </template>
                     </lightning-tabset>
                 </lightning-layout-item>
             </lightning-layout>

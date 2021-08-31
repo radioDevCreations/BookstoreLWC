@@ -1,5 +1,20 @@
 <template>
-    
-    <template if:true={ordersFound}></template>
-    <template if:false={ordersFound}></template>
+    <lightning-card  variant="Narrow"  title="Orders Browser" icon-name="utility:adjust_value">
+        <template if:true={ordersFound}>
+            <ul class="slds-var-p-around_medium">
+                <div class="slds-grid slds-var-p-around_medium title-row">
+                    <div class="slds-size_2-of-12 slds-align_absolute-center">Order Id</div>
+                    <div class="slds-size_2-of-12 slds-align_absolute-center">Status</div>
+                    <div class="slds-size_2-of-12 slds-align_absolute-center">Email</div>
+                    <div class="slds-size_2-of-12 slds-align_absolute-center">Price</div>
+                    <div class="slds-size_2-of-12 slds-align_absolute-center">Order Date</div>    
+                    <div class="slds-size_2-of-12 slds-align_absolute-center">Check Details</div>    
+                </div>
+                <template for:each={filteredOrders} for:item="order">
+                    <c-order-tile order={order} key={order.Id} management={management}></c-order-tile>
+                </template>
+            </ul>
+        </template>
+        <template if:false={ordersFound}></template>
+    </lightning-card>
 </template>

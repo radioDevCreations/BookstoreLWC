@@ -17,16 +17,29 @@
         <fieldName>bookId</fieldName>
         <description>bookId message</description>
     </lightningMessageFields>
+
     <lightningMessageFields>
         <fieldName>newsId</fieldName>
         <description>newsId message</description>
     </lightningMessageFields>
+
     <lightningMessageFields>
         <fieldName>suppliesManagerMode</fieldName>
         <description>suppliesManagerMode message</description>
     </lightningMessageFields>
+
     <lightningMessageFields>
         <fieldName>bookstoreManagementTab</fieldName>
         <description>bookstoreManagementTab message</description>
     </lightningMessageFields>
+
+    <lightningMessageFields>
+        <fieldName>orderId</fieldName>
+        <description>bookstoreManager orderId message</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>orderManagerMode</fieldName>
+        <description>orderManagerMode message</description>
+    </lightningMessageFields>
+
 </LightningMessageChannel>

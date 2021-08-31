@@ -26,7 +26,7 @@ export default class BookOpinionsAndGrades extends NavigationMixin(LightningElem
     getBookReviews(){
         getReviews({bookId : this.privateBookId}).then(reviews => {
             this.bookReviews = reviews;
-            console.log('reviews saved');
+            //console.log('reviews saved');
         }).catch((error) =>{
             this.showToast('ERROR', error.body.message, 'error');
         })

@@ -1,0 +1,23 @@
+<template>
+    <template if:true={orderFound}>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12">
+                <lightning-tabset variant="scoped" active-tab-value={selectedTabValue}>
+                    <template if:true={management}>
+                        <lightning-tab label="Change Status" value="CHANGE_STATUS" onactive={handleTabChange}>
+                            <c-change-order-status-tab order-id={selectedOrderId}></c-change-order-status-tab>
+                        </lightning-tab>
+                        <lightning-tab label="Delete Order" value="DELETE" onactive={handleTabChange}>
+                            <c-delete-record-tab record-id={selectedOrderId} label="Delete Order"></c-delete-record-tab>
+                        </lightning-tab>
+                        <template if:true={editable}>
+                            <lightning-tab label="Edit Data" value="EDIT_DATA" onactive={handleTabChange}>
+                                <c-edit-order-tab order-id={selectedOrderId}></c-edit-order-tab>
+                            </lightning-tab>
+                        </template>
+                    </template>
+                </lightning-tabset>
+            </lightning-layout-item>
+        </lightning-layout> 
+    </template>
+</template>

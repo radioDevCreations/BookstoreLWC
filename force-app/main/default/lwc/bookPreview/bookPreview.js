@@ -7,6 +7,7 @@ import createCartItem from '@salesforce/apex/cartController.createCartItem';
 export default class BookPreview extends NavigationMixin(LightningElement) {
 
     @api book;
+    @api allDetails;
 
 
     @api selectedMode;
@@ -121,6 +122,15 @@ export default class BookPreview extends NavigationMixin(LightningElement) {
     get bookQuantity(){
         try {
             return this.book.data.fields.Quantity__c.value;
+        } catch (error) {
+            console.log(error);
+            return 'NA';
+        }
+    }
+
+    get bookReleaseDate(){
+        try {
+            return this.book.data.fields.Release_Date__c.value;
         } catch (error) {
             console.log(error);
             return 'NA';

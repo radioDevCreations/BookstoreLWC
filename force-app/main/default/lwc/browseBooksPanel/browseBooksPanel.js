@@ -1,12 +1,12 @@
-import { LightningElement, track, wire } from 'lwc';
-import getAllBooks from '@salesforce/apex/browseBooksPanelController.getAllBooks';
+import { LightningElement, track, wire, api } from 'lwc';
+import getAllAvailableBooks from '@salesforce/apex/browseBooksPanelController.getAllAvailableBooks';
 import messageChannel from "@salesforce/messageChannel/messageChannel__c";
 import { MessageContext, subscribe, unsubscribe, APPLICATION_SCOPE } from 'lightning/messageService';
 import {refreshApex} from '@salesforce/apex';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent'
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class BrowseBooksPanel extends LightningElement {
-
+    @api management;
     @track selectedCategoryId = '';
     @track searchedKeyword = '';
     allBooks;
@@ -28,8 +28,9 @@ export default class BrowseBooksPanel extends LightningElement {
         this.subscription = null;
     }
 
+
     allBooksResponse
-    @wire(getAllBooks, {selectedCategoryId: '$selectedCategoryId'})
+    @wire(getAllAvailableBooks, {selectedCategoryId: '$selectedCategoryId'})
     wiredBooks(response){
         const {data, error} = response;
         this.allBooksResponse = response;
@@ -70,7 +71,7 @@ export default class BrowseBooksPanel extends LightningElement {
     }
 
     refresh(message){
-        console.log(message);
+        //console.log(message);
         if(message.status === 'refresh'){
             refreshApex(this.allBooksResponse);
         }

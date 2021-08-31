@@ -1,20 +1,50 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import getQuantity from '@salesforce/apex/suppliesManagerActionsController.getQuantity';
+import messageChannel from "@salesforce/messageChannel/messageChannel__c";
+import { MessageContext, subscribe, unsubscribe, APPLICATION_SCOPE, publish } from 'lightning/messageService';
+import { refreshApex } from '@salesforce/apex';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import updateQuantity from '@salesforce/apex/suppliesManagerActionsController.updateQuantity';
 
 export default class SuppliesManagerSend extends LightningElement {
     @api bookId;
     @track bookQuantity;
 
+    @wire(MessageContext) messageContext;
+
+    subscription = null;
+    @wire(MessageContext) messageContext;
+
+    connectedCallback(){
+            this.subscription = subscribe(
+                this.messageContext,
+                messageChannel, 
+                message => {
+                this.refresh(message);
+                },
+                { scope: APPLICATION_SCOPE });
+    }
+
+    disconnectedCallback() {
+        unsubscribe(this.subscription);
+        this.subscription = null;
+    }
+
     @track operatingQuantity;
+
+    
+    bookQuantityResponse
     @wire(getQuantity, {selectedBookId: '$bookId'})
-    wiredQuantity({data, error}){
+    wiredQuantity(response){
+        const {data, error} = response;
+        this.bookQuantityResponse = response;
         if(data){
             this.bookQuantity = data;
         } else if (error) {
             this.showToast('ERROR', error.body.message, 'error')
         }
     };
+
 
     showToast(title, message, variant) {
         const event = new ShowToastEvent({
@@ -24,12 +54,21 @@ export default class SuppliesManagerSend extends LightningElement {
         });
         this.dispatchEvent(event);
     }
-        
+
+    refresh(message){
+        console.log('message');
+        if(message.status === 'refresh'){
+            refreshApex(this.bookQuantityResponse);
+        }
+    }  
 
     handleSendSingleSupplyClick(){
         updateQuantity({selectedBookId: this.bookId, newQuantity: this.bookQuantity - 1})
         .then(() => {
-            
+            const messagePayload = {
+                status: 'refresh',
+            }
+            publish(this.messageContext, messageChannel, messagePayload);
         })
         .catch(error => {
             console.log(error);
@@ -38,7 +77,10 @@ export default class SuppliesManagerSend extends LightningElement {
     handleSendTenSuppliesClick(){
         updateQuantity({selectedBookId: this.bookId, newQuantity: this.bookQuantity - 10})
         .then(() => {
-
+            const messagePayload = {
+                status: 'refresh',
+            }
+            publish(this.messageContext, messageChannel, messagePayload);
         })
         .catch(error => {
             console.log(error);
@@ -47,7 +89,10 @@ export default class SuppliesManagerSend extends LightningElement {
     handleSendSuppliesClick(){
         updateQuantity({selectedBookId: this.bookId, newQuantity: this.bookQuantity - this.operatingQuantity})
         .then(() => {
-
+            const messagePayload = {
+                status: 'refresh',
+            }
+            publish(this.messageContext, messageChannel, messagePayload);
         })
         .catch(error => {
             console.log(error);
@@ -55,6 +100,6 @@ export default class SuppliesManagerSend extends LightningElement {
     }
     handleOperatingQuantityChange(event){
         this.operatingQuantity = parseInt(event.target.value);
-        console.log(this.operatingQuantity);
+        //console.log(this.operatingQuantity);
     }
 }

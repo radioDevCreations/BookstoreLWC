@@ -6,6 +6,9 @@
         <section class="content slds-var-p-bottom_small">
             {newsDetails.Content__c}
         </section>
+        <section class="date slds-var-p-vertical_small">
+            {publicationDate}
+        </section>
         <template if:true={editable}>
             <section class="slds-var-p-bottom_small">
                 <lightning-button variant="base" label="Show Details" title="Show Details"></lightning-button>

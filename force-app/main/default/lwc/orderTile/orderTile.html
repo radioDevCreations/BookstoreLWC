@@ -1,0 +1,21 @@
+<template>
+    <div class="order-card">
+        <li class="slds-grid slds-wrap slds-var-p-around_medium order-data">
+            <div class="slds-small-size_1-of-1 slds-medium-size_2-of-12 slds-align_absolute-center">{order.NameId}</div>
+            <div class="slds-small-size_1-of-1 slds-medium-size_2-of-12 slds-align_absolute-center">{order.Status}</div>
+            <div class="slds-small-size_1-of-1 slds-medium-size_2-of-12 slds-align_absolute-center">{order.Email}</div>
+            <div class="slds-small-size_1-of-1 slds-medium-size_2-of-12 slds-align_absolute-center">{order.Summary_Price}&euro;</div>
+            <div class="slds-small-size_1-of-1 slds-medium-size_2-of-12 slds-align_absolute-center">{order.Created_Date}</div>    
+            <div class="slds-small-size_1-of-1 slds-medium-size_2-of-12 slds-align_absolute-center slds-p-around_small">
+                <lightning-button variant="brand" label={detailsShowed.label} onclick={handleShowOrderDetailsClick}>
+
+                </lightning-button>
+            </div>    
+        </li>
+        <template if:true={detailsShowed.value}>
+            <div class="slds-var-p-around_medium order-details">
+                <c-order-details order={order} management={management}></c-order-details>
+            </div>
+        </template>
+    </div>
+</template>

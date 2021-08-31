@@ -1,0 +1,7 @@
+<template>
+    <template if:true={selectedOrderId}>
+        <lightning-card title="Edit This Order">
+            <c-edit-order-tab order-id={selectedOrderId}></c-edit-order-tab>
+        </lightning-card>
+    </template>
+</template>

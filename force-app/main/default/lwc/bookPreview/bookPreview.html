@@ -16,6 +16,10 @@
                             </span>
                         </template>
                     </div>
+                    <div class="bookproperty">
+                        <span class="label">Author:</span>
+                        <lightning-formatted-text value={bookAuthor}> </lightning-formatted-text>
+                    </div>
                     <template if:true={supplies}>
                         <div class="bookproperty">
                             <span class="quantity">
@@ -23,10 +27,18 @@
                             </span>
                         </div>
                     </template>
-                    <div class="bookproperty">
-                        <span class="label">Author:</span>
-                        <lightning-formatted-text value={bookAuthor}> </lightning-formatted-text>
-                    </div>
+                    <template if:true={allDetails}>
+                        <div class="bookproperty">
+                            <span class="label">Quantity:</span>
+                            <lightning-formatted-number value={bookQuantity}> </lightning-formatted-number>
+                        </div>
+                    </template>
+                    <template if:true={allDetails}>
+                        <div class="bookproperty">
+                            <span class="label">Release Date:</span>
+                            <lightning-formatted-date-time value={bookReleaseDate}> </lightning-formatted-date-time>
+                        </div>
+                    </template>
                     <div class="bookproperty">
                         <span class="label">Category:</span>
                         <lightning-formatted-text value={bookCategory}></lightning-formatted-text>

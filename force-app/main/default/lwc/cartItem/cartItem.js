@@ -21,11 +21,10 @@ export default class CartItem extends LightningElement {
         });
     }
 
-    handleQuantityInputChange(event){
-        this.cartItemQuantity = event.target.value;
-    }
-
-    handleUpdateQuantity(event){
-        updateCartItemQuantity({ cartItemId: this.cartItem.Id, newQuantity: event.target.value });
+    @api
+    handleUpdateQuantity(){
+        const quantityInputValue = this.template.querySelector('lightning-input').value;
+        const promise = updateCartItemQuantity({ cartItemId: this.cartItem.Id, newQuantity: quantityInputValue })
+        return promise;
     }
 }

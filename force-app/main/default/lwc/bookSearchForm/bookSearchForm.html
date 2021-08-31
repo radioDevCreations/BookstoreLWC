@@ -24,12 +24,14 @@
                     onchange={handleCategoryChange}></lightning-combobox>
                 </lightning-layout-item>
                 
-                <lightning-layout-item
-                    class="slds-align_absolute-center slds-var-m-around_small">
-                    <lightning-button
-                    label="Go to Cart"
-                    onchange={handleAddNewCategory}></lightning-button> 
-                </lightning-layout-item>
+                <template if:true={management}>
+                    <lightning-layout-item
+                        class="slds-align_absolute-center slds-var-m-around_small">
+                            <lightning-button
+                            label="Add New Category"
+                            onclick={handleAddNewCategory}></lightning-button> 
+                    </lightning-layout-item>
+                </template>
             </div>
         </lightning-layout>
     </div>

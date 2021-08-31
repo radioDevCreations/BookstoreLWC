@@ -3,7 +3,7 @@ import { NavigationMixin } from 'lightning/navigation';
 import getCartItemsNumber from '@salesforce/apex/cartController.getCartItemsNumber';
 import messageChannel from "@salesforce/messageChannel/messageChannel__c";
 import { MessageContext, subscribe, unsubscribe, APPLICATION_SCOPE } from 'lightning/messageService';
-import {refreshApex} from '@salesforce/apex';
+import { refreshApex } from '@salesforce/apex';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent'
 
 export default class CartItemsInfo extends NavigationMixin(LightningElement) {
@@ -51,17 +51,19 @@ export default class CartItemsInfo extends NavigationMixin(LightningElement) {
 
     handleNavigateToCartTab(){
         this[NavigationMixin.Navigate]({
-            type: 'standard__navItemPage',
+            type: 'comm__namedPage',
             attributes: {
-                apiName: 'Cart',
-            }
+                pageName: 'cart'
+            },
         });
     }
 
     refresh(message){
-        console.log(message);
         if(message.status === 'refresh'){
             refreshApex(this.cartItemsNumberResponse);
+        }
+        if(message.status === 'buy'){
+            refreshApex(this.cartItemsDataResponse);
         }
     }
 

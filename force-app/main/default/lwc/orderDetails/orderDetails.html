@@ -1,0 +1,53 @@
+<template>
+    <section class="slds-var-p-around_medium order-data">
+        <div class="order-details">
+            <div>{order.Street}</div>
+            <div>{order.City}</div>
+            <div>{order.Postal_Code}</div>
+            <div>{order.Province}, {order.Country}</div>
+            <div>{order.Summary_Price}&euro;</div>
+        </div>
+        <template if:false={management}>
+            <template if:true={editable}>
+                <lightning-button label="Edit" class="buttons slds-var-p-around_medium" data-mode="" onclick={selectThisOrderWithMode}>
+                    
+                </lightning-button>
+            </template>
+        </template>
+        <template if:true={management}>
+            <lightning-button-group class="buttons slds-var-p-around_medium">
+                <template if:true={editable}>
+                    <lightning-button label="Edit" data-mode="EDIT_DATA" onclick={selectThisOrderWithMode}>
+    
+                    </lightning-button>
+                </template>
+                <lightning-button label="Delete" data-mode="DELETE" onclick={selectThisOrderWithMode}>
+
+                </lightning-button>
+                <lightning-button label="Change Status" data-mode="CHANGE_STATUS" onclick={selectThisOrderWithMode}>
+
+                </lightning-button>
+            </lightning-button-group>
+        </template>
+    </section>
+    <section class="slds-var-p-around_medium order-list">
+        <template if:true={itemsFound}>
+            <ul class="order-list__products">
+                <template for:each={orderItems} for:item="orderItem">
+                    <li class="order-list__product slds-grid slds-var-p-vertical_small" key={orderItem.Id}>
+                        <div class="slds-size_3-of-12">{orderItem.Book_Name}</div>
+                        <div class="slds-size_1-of-12 slds-align_absolute-center">{orderItem.Book_Price}&euro;</div>
+                        <div class="slds-size_3-of-12 slds-align_absolute-center">Quantity: {orderItem.Book_Quantity}</div>
+                        <div class="slds-size_3-of-12 slds-align_absolute-center">{orderItem.Book_Category}</div>
+                        <div class="slds-size_2-of-12 slds-align_absolute-center">{orderItem.Book_ISBN}</div> 
+                    </li>
+                </template>
+            </ul>
+        </template>
+        <template if:false={itemsFound}>
+            <div class="order-list__error">
+                No Items Found.
+            </div>
+        </template>
+    </section>
+</template>

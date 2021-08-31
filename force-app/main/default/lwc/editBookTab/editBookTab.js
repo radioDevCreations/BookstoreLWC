@@ -24,16 +24,16 @@ export default class EditBookTab extends LightningElement {
         CATEGORY_FIELD,
         AUTHOR_FIELD,
         DESCRIPTION_FIELD
-    ]
+    ];
 
-    handleAddNewBook(){
-        this[NavigationMixin.Navigate]({
-            type: 'standard__objectPage',
-            attributes: {
-                recordId: this.bookId,
-                objectApiName: this.objectApiName,
-                actionName: 'edit',
-            }
-        });
-    }
+    // handleAddNewBook(){
+    //     this[NavigationMixin.Navigate]({
+    //         type: 'standard__objectPage',
+    //         attributes: {
+    //             recordId: this.bookId,
+    //             objectApiName: this.objectApiName,
+    //             actionName: 'edit',
+    //         }
+    //     });
+    // }
 }

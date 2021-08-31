@@ -26,7 +26,7 @@ export default class BookstoreManagement extends LightningElement {
             from: 'bookstoreManagement',
         }
 
-        console.log(messagePayload.bookstoreManagementTab);
+        //console.log(messagePayload.bookstoreManagementTab);
 
         publish(this.messageContext, messageChannel, messagePayload);
     }

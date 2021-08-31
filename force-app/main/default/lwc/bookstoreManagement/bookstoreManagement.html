@@ -11,13 +11,13 @@
         <section class="bookstore-management__content">
             <lightning-tabset variant="scoped" active-tab-value={selectedTabValue}>
                 <lightning-tab label="Books Editor" value="BOOK_EDITOR" onactive={handleTabChange}>
-                    <c-browse-books-panel></c-browse-books-panel>
+                    <c-browse-books-panel management></c-browse-books-panel>
                 </lightning-tab>
                 <lightning-tab label="Supplies Manager" value="SUPPLIES_MANAGER" onactive={handleTabChange}>
                     <c-supplies-manager></c-supplies-manager>
                 </lightning-tab>
                 <lightning-tab label="Orders Manager" value="ORDERS_MANAGER" onactive={handleTabChange}>
-                    Orders Management
+                    <c-orders-browser management></c-orders-browser>
                 </lightning-tab>
                 <lightning-tab label="News Editor" value="NEWS_EDITOR" onactive={handleTabChange}>
                     <c-browse-news-panel editable></c-browse-news-panel>

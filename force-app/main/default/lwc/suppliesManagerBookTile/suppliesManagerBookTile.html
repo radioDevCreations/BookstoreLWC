@@ -1,25 +1,25 @@
 <template>
-    <div class="book slds-var-p-around_large slds-grid" >
+    <div class="book slds-var-p-around_large slds-grid slds-wrap" >
         <template if:true={priceAfterDiscount}>
-            <section class="slds-size_1-of-12">
+            <section class="field slds-small-size_1-of-1 slds-medium-size_2-of-12">
                 <strong class="current-price">{priceAfterDiscount}&euro;</strong> / <del class="last-price">{bookDetails.Price__c}&euro;</del>
             </section>
         </template>
         <template if:false={priceAfterDiscount}>
-            <section class="price slds-size_1-of-12">
+            <section class="field price slds-small-size_1-of-1 slds-medium-size_2-of-12">
                 <span>{bookDetails.Price__c}&euro;</span>
             </section>
         </template>
-        <section class="title slds-size_5-of-12">
+        <section class="field title slds-small-size_1-of-1 slds-medium-size_2-of-12">
             {bookDetails.Name}
         </section>
-        <section class=" slds-size_2-of-12">
+        <section class="field slds-small-size_1-of-1 slds-medium-size_2-of-12">
             {bookDetails.Author_Name}
         </section>
-        <section class=" slds-size_1-of-12">
+        <section class="field slds-small-size_1-of-1 slds-medium-size_2-of-12">
             {bookDetails.ISBN__c}
         </section>
-        <section class="quantity slds-size_2-of-12">
+        <section class="field slds-small-size_1-of-1 quantity slds-medium-size_2-of-12">
             Quantity: {bookDetails.Quantity__c}
         </section>
 
@@ -27,6 +27,6 @@
         label="Buy Supplies"
         onclick={handleShowDetailsButtonClick}
         variant="base"
-        class="base-button slds-size_1-of-12"></lightning-button>
+        class="field base-button slds-small-size_1-of-1 slds-medium-size_2-of-12"></lightning-button>
     </div>
 </template>

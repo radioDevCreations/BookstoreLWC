@@ -2,8 +2,8 @@ import { LightningElement, track, wire, api } from 'lwc';
 import getAllNews from '@salesforce/apex/browseNewsPanelController.getAllNews';
 import messageChannel from "@salesforce/messageChannel/messageChannel__c";
 import { MessageContext, subscribe, unsubscribe, APPLICATION_SCOPE } from 'lightning/messageService';
-import {refreshApex} from '@salesforce/apex';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent'
+import { refreshApex } from '@salesforce/apex';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class BrowseNewsPanel extends LightningElement {
 
@@ -63,7 +63,7 @@ export default class BrowseNewsPanel extends LightningElement {
     }
 
     refresh(message){
-        console.log(message);
+        //console.log(message);
         if(message.status === 'refresh'){
             refreshApex(this.allNewsResponse);
         }

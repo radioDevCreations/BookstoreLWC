@@ -1,4 +1,4 @@
-import { LightningElement, wire, track } from 'lwc';
+import { LightningElement, wire, track, api } from 'lwc';
 import { getRecord } from 'lightning/uiRecordApi';
 import messageChannel from "@salesforce/messageChannel/messageChannel__c";
 import { MessageContext, subscribe, unsubscribe, APPLICATION_SCOPE } from 'lightning/messageService';
@@ -13,6 +13,8 @@ import BOOK_PRICE_AFTER_DISCOUNT from '@salesforce/schema/Book__c.Price_After_Di
 import BOOK_DESCRIPTION from '@salesforce/schema/Book__c.Description__c';
 import BOOK_AUTHOR_NAME from '@salesforce/schema/Book__c.Author__r.Name';
 import BOOK_AUTHOR_DESCRIPTION from '@salesforce/schema/Book__c.Author__r.Description__c';
+import BOOK_QUANTITY from '@salesforce/schema/Book__c.Quantity__c';
+import BOOK_RELEASE_DATE from '@salesforce/schema/Book__c.Release_Date__c';
 
 const fields = [
     BOOK_ID,
@@ -24,12 +26,16 @@ const fields = [
     BOOK_PRICE_AFTER_DISCOUNT,
     BOOK_DESCRIPTION,
     BOOK_AUTHOR_NAME,
-    BOOK_AUTHOR_DESCRIPTION
+    BOOK_AUTHOR_DESCRIPTION,
+    BOOK_QUANTITY,
+    BOOK_RELEASE_DATE
 ]
 
 export default class BookDetails extends LightningElement {
 
-    @track selectedBookId;
+    @api selectedBookId;
+    @api customerMode;
+    @api allDetails;
     @track selectedTabValue;
     subscription = null;
 

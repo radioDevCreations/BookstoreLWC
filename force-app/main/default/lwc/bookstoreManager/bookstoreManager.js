@@ -27,7 +27,7 @@ export default class BookstoreManager extends LightningElement {
 
     handleSelectedManagerComponent(message){
         if(message && message.from === 'bookstoreManagement'){
-                console.log(message.bookstoreManagementTab);
+                //console.log(message.bookstoreManagementTab);
                 this.bookstoreManagementTab = message.bookstoreManagementTab;
             }
     }

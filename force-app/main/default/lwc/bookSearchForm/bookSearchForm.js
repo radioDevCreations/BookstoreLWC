@@ -1,8 +1,10 @@
-import { LightningElement, track, wire} from 'lwc';
+import { LightningElement, track, wire, api} from 'lwc';
 import getCategories from '@salesforce/apex/bookSearchFormController.getCategories';
+import { NavigationMixin } from 'lightning/navigation';
 
-export default class BookSearchForm extends LightningElement {
+export default class BookSearchForm extends NavigationMixin(LightningElement) {
     @track bookCategories;
+    @api management;
 
     @wire(getCategories)
     wiredCategories({data, error}){
@@ -31,6 +33,21 @@ export default class BookSearchForm extends LightningElement {
 
         const searchByKeywordChangeEvent = new CustomEvent('searchbykeywordchange', {detail: keyword});
         this.dispatchEvent(searchByKeywordChangeEvent);
+    }
+
+    handleAddNewCategory(){
+        console.log('it works');
+        this[NavigationMixin.Navigate]({
+            type: 'standard__objectPage',
+            attributes: {
+                objectApiName: 'Category__c',
+                actionName: 'new',
+            },
+            state: {
+                nooverride: 1,
+                navigationLocation: 'RELATED_LIST',
+            }
+        });
     }
 
 }

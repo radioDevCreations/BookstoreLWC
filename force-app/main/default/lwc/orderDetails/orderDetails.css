@@ -1,0 +1,21 @@
+.order-data{
+    font-size: 16px;
+    position: relative;
+}
+.order-details{
+}
+.order-list{
+    font-size: 16px;
+}
+.order-list__products{
+
+}
+.order-list__error{
+
+}
+.buttons{
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 14px;
+}

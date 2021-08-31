@@ -2,10 +2,19 @@ public with sharing class cartController {
     @AuraEnabled(cacheable=true)
     public static List<Cart_Item__c> getCartItems(){
         String userId = UserInfo.getUserId();
-        return [SELECT Id, Book__r.Id, Book__r.Name, Book_Price__c, Book__r.Category__r.Name, Book__r.ISBN__c, User__c, Custom_Order__c
+        return [SELECT Id, Book__r.Id, Book__r.Name, Book_Price__c, Total_Price__c, Book__r.Category__r.Name, Book__r.ISBN__c, User__c, Custom_Order__c, Quantity__c
         FROM Cart_Item__c  
         WHERE User__c =: userId
         AND Custom_Order__c =: null]; 
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static List<Cart_Item__c> getCartItemsByOrderId(Id customOrderId){
+        String userId = UserInfo.getUserId();
+        return [SELECT Id, Book__r.Id, Book__r.Name, Book_Price__c, Total_Price__c, Book__r.Category__r.Name, Book__r.ISBN__c, User__c, Custom_Order__c, Quantity__c
+        FROM Cart_Item__c  
+        WHERE User__c =: userId
+        AND Custom_Order__c =: customOrderId]; 
     }
 
     @AuraEnabled(cacheable=true)
@@ -41,6 +50,8 @@ public with sharing class cartController {
         }
 
         update cartItemsToModification;
+
+        CustomOrderTriggerHandler.sendConfirmationEmail([SELECT Id, Name, Email__c, Summary_Price__c FROM Custom_Order__c WHERE Id =: orderId]);
     }
 
     @AuraEnabled
@@ -53,3 +64,4 @@ public with sharing class cartController {
         update cartItemToModification;
     }
 }
+

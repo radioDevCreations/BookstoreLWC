@@ -3,6 +3,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import messageChannel from "@salesforce/messageChannel/messageChannel__c";
 import { publish, MessageContext } from 'lightning/messageService';
 import createOrder from '@salesforce/apex/ordersController.createOrder';
+import validateQuantity from '@salesforce/apex/QuantityValidator.validateQuantity';
 import assignCartItemsToOrder from '@salesforce/apex/cartController.assignCartItemsToOrder';
 
 export default class CartContent extends LightningElement {
@@ -28,6 +29,15 @@ export default class CartContent extends LightningElement {
         if(this.progressCurrentStep === 1){
             if(this.orders.length > 0){
                 this.progressCurrentStep += 1;
+                const promises = [];
+                const items = this.template.querySelectorAll('c-cart-item')
+                items.forEach(cartItem => promises.push(cartItem.handleUpdateQuantity()));
+                Promise.all(promises).then(() => {
+                    const messagePayload = {
+                        status: 'update_quantity',
+                    }
+                    publish(this.messageContext, messageChannel, messagePayload);
+                });
             }
         } else if (this.progressCurrentStep === 2){
             const address = this.template.querySelector('lightning-input-address');
@@ -35,6 +45,10 @@ export default class CartContent extends LightningElement {
             const isValid = address.checkValidity();
             
             if(isValid && this.isEmailValid()) {
+                const messagePayload = {
+                    status: 'refresh',
+                }
+                publish(this.messageContext, messageChannel, messagePayload);
                 this.address = address;
                 this.address.email = email.value;
                 this.progressCurrentStep += 1;
@@ -45,23 +59,34 @@ export default class CartContent extends LightningElement {
     }
 
     handleBuyButtonClick(){
-        let sum = 0;
-        this.orders.forEach(item => {
-            sum += item.Book_Price;
-        });
-        return createOrder({ 
-            email: this.address.email,
-            price: sum,
-        })
-        .then(newOrderId => {
-            const ordersToModification = this.orders.map((item) => item.Id)
-            assignCartItemsToOrder({ cartItemsIds: ordersToModification, orderId: newOrderId });
-        })
-        .then(() => {
-            const messagePayload = {
-                status: 'refresh',
+        validateQuantity().then((validation) => {
+        if(validation){
+                let sum = 0;
+                this.orders.forEach(item => {
+                    sum += item.Total_Price;
+                });
+                createOrder({ 
+                    email: this.address.email,
+                    street: this.address.street,
+                    city: this.address.city,
+                    postalCode: this.address.postalCode,
+                    province: this.address.province,
+                    country: this.address.country,
+                    price: sum,
+                })
+                .then(newOrderId => {
+                    const ordersToModification = this.orders.map((item) => item.Id)
+                    assignCartItemsToOrder({ cartItemsIds: ordersToModification, orderId: newOrderId })
+                    .then(() => {
+                        const messagePayload = {
+                            status: 'buy',
+                        }
+                        publish(this.messageContext, messageChannel, messagePayload);
+                    });
+                });
+            } else {
+                console.log('validation should be passed');
             }
-            publish(this.messageContext, messageChannel, messagePayload);
         });
     }
 

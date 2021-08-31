@@ -7,7 +7,7 @@ export default class OrderResume extends LightningElement {
     get summaryPrice(){
         let sum = 0;
         this.cartItems.forEach(item => {
-            sum += item.Book_Price;
+            sum += item.Total_Price;
         });
         return sum;
     }
